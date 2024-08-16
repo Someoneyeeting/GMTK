@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgw2wrg7rism3"]
+[gd_scene load_steps=5 format=3 uid="uid://cgw2wrg7rism3"]
 
 [ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://head.tscn" id="1_kqp3p"]
+[ext_resource type="PackedScene" uid="uid://88fwtr1j7jgo" path="res://spike.tscn" id="2_m5nc6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu2xr"]
 size = Vector2(564, 111)
@@ -26,3 +27,6 @@ shape = SubResource("RectangleShape2D_ag8ak")
 
 [node name="head" parent="." instance=ExtResource("1_kqp3p")]
 position = Vector2(119, 384)
+
+[node name="Spike" parent="." instance=ExtResource("2_m5nc6")]
+position = Vector2(362, 303)

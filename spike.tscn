@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://88fwtr1j7jgo"]
+
+[ext_resource type="Script" path="res://spike.gd" id="1_gx62s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_isaqp"]
+size = Vector2(10, 10)
+
+[node name="Spike" type="Area2D" groups=["cut"]]
+script = ExtResource("1_gx62s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_isaqp")
+debug_color = Color(1, 0, 0, 0.42)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0, 0, 1)
+
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]

@@ -6,19 +6,35 @@ extends CharacterBody2D
 var grid_scale = Vector2(40,40)
 
 const TAIL = preload("res://tail.tscn")
+const BODY = preload("res://deadbody.tscn")
 var cols := []
 var poses = []
 var off := Vector2.ZERO
 
+
+func add_tail():
+	var tail = TAIL.instantiate()
+	tail.ind = cols.size()
+	cols.append(tail)
+	add_child(tail)
+	tail.modulate = lerp(Color.WHITE,Color.BLACK,float(cols.size()) / length)
+	tail.cut.connect(cut)
+
 func _ready() -> void:
 	
 	for i in length:
-		var tail = TAIL.instantiate()
-		cols.append(tail)
-		add_child(tail)
-		tail.modulate = lerp(Color.WHITE,Color.BLACK,float(i) / length)
-		if(i == 0):
-			$rayspos.reparent(tail)
+		add_tail()
+	
+	$rayspos.reparent(cols[0])
+
+func cut(ind):
+	cols[ind].queue_free()
+	length = ind
+	if(ind != cols.size() - 1):
+		var body = BODY.instantiate()
+		for i in range(ind + 1,cols.size()):
+			cols[i].reparent(body)
+		get_parent().add_child.call_deferred(body)
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
@@ -52,7 +68,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	
 	while(cols.size() > length):
-		cols.pop_back().queue_free()
+		cols.pop_back()
 	while(cols.size() < length):
 		var tail = TAIL.instantiate()
 		tail.position = cols[-1].position
