@@ -16,9 +16,9 @@ func _ready() -> void:
 		var tail = TAIL.instantiate()
 		cols.append(tail)
 		add_child(tail)
+		tail.modulate = lerp(Color.WHITE,Color.BLACK,float(i) / length)
 		if(i == 0):
 			$rayspos.reparent(tail)
-		tail.modulate = lerp(Color.WHITE,Color.BLACK,float(i) / length)
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
@@ -36,7 +36,7 @@ func _input(event: InputEvent) -> void:
 	off += dir
 	poses.insert(0,dir)
 	#$CollisionShape2D.position = off
-	if(poses.size() > length):
+	while(poses.size() > cols.size()):
 		poses.pop_back()
 	
 	for i in range(poses.size()):
@@ -47,4 +47,13 @@ func _input(event: InputEvent) -> void:
 func _physics_process(delta: float) -> void:
 	$Node2D.position = cols[0].position
 	move_and_collide(Vector2(0,10))
+	
+	while(cols.size() > length):
+		cols.pop_back().queue_free()
+	while(cols.size() < length):
+		var tail = TAIL.instantiate()
+		cols.append(tail)
+		add_child(tail)
+	for i in length:
+		cols[i].modulate = lerp(Color.WHITE,Color.BLACK,i / length)
 	#print($CharacterBody2D.is_on_floor())
