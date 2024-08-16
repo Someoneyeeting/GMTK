@@ -1,3 +1,4 @@
 [gd_scene format=3 uid="uid://d357d31psslwy"]
 
 [node name="deadbody" type="RigidBody2D"]
+lock_rotation = true

@@ -28,6 +28,8 @@ func _ready() -> void:
 	$rayspos.reparent(cols[0])
 
 func cut(ind):
+	if(ind == 0):
+		return
 	cols[ind].queue_free()
 	length = ind
 	if(ind != cols.size() - 1):
@@ -74,6 +76,4 @@ func _physics_process(delta: float) -> void:
 		tail.position = cols[-1].position
 		cols.append(tail)
 		add_child(tail)
-	for i in length:
-		cols[i].modulate = lerp(Color.WHITE,Color.BLACK,float(i) / length)
 	#print($CharacterBody2D.is_on_floor())
