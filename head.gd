@@ -10,7 +10,7 @@ const BODY = preload("res://deadbody.tscn")
 var cols := []
 var poses = []
 var off := Vector2.ZERO
-
+var frameedit = false
 
 func add_tail():
 	var tail = TAIL.instantiate()
@@ -28,7 +28,7 @@ func _ready() -> void:
 	$rayspos.reparent(cols[0])
 
 func cut(ind):
-	if(ind == 0):
+	if(ind == 0 or ind >= cols.size()):
 		return
 	cols[ind].queue_free()
 	length = ind
@@ -40,6 +40,8 @@ func cut(ind):
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
+	if(frameedit):
+		return
 	if(not is_on_floor()):
 		return
 	if(event.is_action_pressed("right") and not %right.is_colliding()):
@@ -53,6 +55,7 @@ func _input(event: InputEvent) -> void:
 	else:
 		return
 	
+	frameedit = true
 	off += dir
 	poses.insert(0,dir)
 	#$CollisionShape2D.position = off
@@ -76,4 +79,5 @@ func _physics_process(delta: float) -> void:
 		tail.position = cols[-1].position
 		cols.append(tail)
 		add_child(tail)
+	frameedit = false
 	#print($CharacterBody2D.is_on_floor())

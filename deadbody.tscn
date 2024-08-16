@@ -1,4 +1,8 @@
-[gd_scene format=3 uid="uid://d357d31psslwy"]
+[gd_scene load_steps=2 format=3 uid="uid://d357d31psslwy"]
 
-[node name="deadbody" type="RigidBody2D"]
-lock_rotation = true
+[ext_resource type="PackedScene" uid="uid://x7fcq7gtpunw" path="res://fall.tscn" id="1_da01p"]
+
+[node name="deadbody" type="CharacterBody2D"]
+
+[node name="fall" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_da01p")]
+target = NodePath("..")

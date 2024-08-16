@@ -4,17 +4,20 @@
 [ext_resource type="PackedScene" uid="uid://88fwtr1j7jgo" path="res://spike.tscn" id="2_m5nc6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu2xr"]
-size = Vector2(564, 111)
+size = Vector2(617.5, 111)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ag8ak"]
 size = Vector2(40, 40)
 
 [node name="Node2D" type="Node2D"]
 
+[node name="Spike" parent="." instance=ExtResource("2_m5nc6")]
+position = Vector2(362, 303)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(323, 498)
+position = Vector2(308.75, 498)
 shape = SubResource("RectangleShape2D_gu2xr")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
@@ -32,5 +35,28 @@ shape = SubResource("RectangleShape2D_ag8ak")
 [node name="head" parent="." instance=ExtResource("1_kqp3p")]
 position = Vector2(119, 384)
 
-[node name="Spike" parent="." instance=ExtResource("2_m5nc6")]
-position = Vector2(362, 303)
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color(0.207521, 0.00169373, 0.433594, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_top = 443.0
+offset_right = 619.0
+offset_bottom = 553.0
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+offset_left = 181.0
+offset_top = 362.0
+offset_right = 222.0
+offset_bottom = 403.0
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D"]
+offset_left = 301.0
+offset_top = 323.0
+offset_right = 342.0
+offset_bottom = 364.0
+
+[node name="ColorRect4" type="ColorRect" parent="Node2D"]
+offset_left = 182.0
+offset_top = 243.0
+offset_right = 223.0
+offset_bottom = 284.0
