@@ -22,6 +22,8 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
+	if(not is_on_floor()):
+		return
 	if(event.is_action_pressed("right") and not %right.is_colliding()):
 		dir.x = grid_scale.x
 	elif(event.is_action_pressed("left") and not %left.is_colliding()):
@@ -46,14 +48,16 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Node2D.position = cols[0].position
-	move_and_collide(Vector2(0,10))
+	velocity.y = 10 / delta
+	move_and_slide()
 	
 	while(cols.size() > length):
 		cols.pop_back().queue_free()
 	while(cols.size() < length):
 		var tail = TAIL.instantiate()
+		tail.position = cols[-1].position
 		cols.append(tail)
 		add_child(tail)
 	for i in length:
-		cols[i].modulate = lerp(Color.WHITE,Color.BLACK,i / length)
+		cols[i].modulate = lerp(Color.WHITE,Color.BLACK,float(i) / length)
 	#print($CharacterBody2D.is_on_floor())

@@ -4,7 +4,7 @@
 
 [node name="head" type="CharacterBody2D"]
 script = ExtResource("1_qru2w")
-length = 20
+length = 15
 
 [node name="Node2D" type="Node2D" parent="."]
 
