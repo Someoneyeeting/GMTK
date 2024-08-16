@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxl2ccdf31g4r"]
+
+[ext_resource type="Script" path="res://head.gd" id="1_qru2w"]
+
+[node name="head" type="CharacterBody2D"]
+script = ExtResource("1_qru2w")
+length = 10
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="down" type="RayCast2D" parent="Node2D"]
+unique_name_in_owner = true
+position = Vector2(0, 20)
+exclude_parent = false
+target_position = Vector2(0, 20)
+hit_from_inside = true
+
+[node name="right" type="RayCast2D" parent="Node2D"]
+unique_name_in_owner = true
+position = Vector2(20, 0)
+exclude_parent = false
+target_position = Vector2(20, 0)
+hit_from_inside = true
+
+[node name="left" type="RayCast2D" parent="Node2D"]
+unique_name_in_owner = true
+position = Vector2(-20, 0)
+exclude_parent = false
+target_position = Vector2(-20, 0)
+hit_from_inside = true
+
+[node name="up" type="RayCast2D" parent="Node2D"]
+unique_name_in_owner = true
+position = Vector2(0, -20)
+exclude_parent = false
+target_position = Vector2(0, -20)
+hit_from_inside = true
+
+[node name="rayspos" type="RemoteTransform2D" parent="."]
+remote_path = NodePath("../Node2D")
