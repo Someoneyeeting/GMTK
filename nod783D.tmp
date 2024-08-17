@@ -35,7 +35,6 @@ sources/4 = SubResource("TileSetAtlasSource_edegm")
 
 [node name="head" parent="." instance=ExtResource("1_kqp3p")]
 position = Vector2(60, 380)
-length = 3
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 position = Vector2(73, 4)

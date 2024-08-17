@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsvou0ox4eyl2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o1505"]
+
+[node name="longer" type="Area2D" groups=["longer"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o1505")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+color = Color(1, 0.960938, 0, 1)
