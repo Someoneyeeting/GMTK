@@ -33,6 +33,7 @@ shape = SubResource("RectangleShape2D_ard08")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fuse"]
 shape = SubResource("RectangleShape2D_oaae4")
+disabled = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="fuse" to="." method="_on_area_2d_2_area_entered"]
