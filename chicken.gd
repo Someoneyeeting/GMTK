@@ -8,8 +8,8 @@ var t = 0
 
 
 func _physics_process(delta: float) -> void:
-	t += delta * 10
-	$ColorRect.rotation_degrees = 10 * abs(velocity.x) / float(speed) * cos(t)
+	t += delta * 12
+	$ColorRect.rotation_degrees = 10 * abs(velocity.x) / float(speed) * sin(t)
 	if(not $idle.is_stopped()):
 		velocity.x = lerp(velocity.x,0.0,0.1)
 		return
