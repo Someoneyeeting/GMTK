@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dkydwjjfqggw2"]
+[gd_scene load_steps=5 format=3 uid="uid://dkydwjjfqggw2"]
 
 [ext_resource type="Script" path="res://tail.gd" id="1_8pf5f"]
 
@@ -8,7 +8,10 @@ size = Vector2(38, 38)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ard08"]
 size = Vector2(38, 38)
 
-[node name="tail" type="CollisionShape2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oaae4"]
+size = Vector2(42, 42)
+
+[node name="tail" type="CollisionShape2D" groups=["tail"]]
 shape = SubResource("RectangleShape2D_8d52h")
 script = ExtResource("1_8pf5f")
 
@@ -24,4 +27,10 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ard08")
 
+[node name="fuse" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fuse"]
+shape = SubResource("RectangleShape2D_oaae4")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="fuse" to="." method="_on_area_2d_2_area_entered"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bxl2ccdf31g4r"]
+[gd_scene load_steps=3 format=3 uid="uid://bxl2ccdf31g4r"]
 
 [ext_resource type="Script" path="res://head.gd" id="1_qru2w"]
+[ext_resource type="PackedScene" uid="uid://dkydwjjfqggw2" path="res://tail.tscn" id="2_2qmoa"]
 
 [node name="head" type="CharacterBody2D"]
 script = ExtResource("1_qru2w")
@@ -38,3 +39,5 @@ hit_from_inside = true
 
 [node name="rayspos" type="RemoteTransform2D" parent="."]
 remote_path = NodePath("../Node2D")
+
+[node name="tail" parent="." instance=ExtResource("2_2qmoa")]

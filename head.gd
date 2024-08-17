@@ -12,19 +12,22 @@ var poses = []
 var off := Vector2.ZERO
 var frameedit = false
 
-func add_tail():
-	var tail = TAIL.instantiate()
+func add_tail(tail = null):
+	if(not tail):
+		tail = TAIL.instantiate()
+		add_child(tail)
 	tail.ind = cols.size()
 	cols.append(tail)
-	add_child(tail)
 	tail.modulate = lerp(Color.WHITE,Color.BLACK,float(cols.size()) / length)
 	tail.cut.connect(cut)
-
+	return tail
+	
 func _ready() -> void:
 	
-	for i in length:
-		add_tail()
+	#for i in length:
+		#add_tail()
 	
+	add_tail($tail)
 	$rayspos.reparent(cols[0])
 
 func cut(ind):
@@ -36,6 +39,7 @@ func cut(ind):
 		var body = BODY.instantiate()
 		for i in range(ind + 1,cols.size()):
 			cols[i].reparent(body)
+			cols[i].cut.disconnect(cut)
 		get_parent().add_child.call_deferred(body)
 
 func _input(event: InputEvent) -> void:
@@ -75,9 +79,7 @@ func _physics_process(delta: float) -> void:
 	while(cols.size() > length):
 		cols.pop_back()
 	while(cols.size() < length):
-		var tail = TAIL.instantiate()
+		var tail = add_tail()
 		tail.position = cols[-1].position
-		cols.append(tail)
-		add_child(tail)
 	frameedit = false
 	#print($CharacterBody2D.is_on_floor())
