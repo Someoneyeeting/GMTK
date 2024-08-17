@@ -14,7 +14,7 @@ var lastdir = Vector2.ZERO
 var frameedit = false
 var plannedmoves = []
 
-func add_tail(tail = null):
+func add_tail(tail = null,ext = false):
 	if(not tail):
 		tail = TAIL.instantiate()
 		add_child.call_deferred(tail)
@@ -24,7 +24,7 @@ func add_tail(tail = null):
 	tail.modulate = lerp(Color.WHITE,Color.BLACK,float(cols.size()) / length)
 	tail.cut.connect(cut)
 	tail.extend.connect(extend)
-	$BodyAnimation.add_body(tail.global_position)
+	$BodyAnimation.add_body(tail.position if not ext else cols[0].position)
 	
 	return tail
 
@@ -39,7 +39,7 @@ func _ready() -> void:
 	$rayspos.reparent(cols[0])
 
 func extend():
-	var t = add_tail()
+	var t = add_tail(null,true)
 	t.position -= poses[-1]
 	#plannedmoves.append(lastdir)
 	#move(lastdir)
@@ -52,10 +52,17 @@ func cut(ind,delseg = true):
 	length = ind
 	if(delseg):
 		cols[ind].queue_free()
+		$BodyAnimation.body[ind].queue_free.call_deferred()
 	var body = BODY.instantiate()
 	for i in range(ind + int(delseg),cols.size()):
-		cols[i].reparent(body)
+		cols[i].reparent.call_deferred(body)
+		$BodyAnimation.body[i].snapobj = cols[i]
+		body.get_node("body").add_body(cols[i].position,$BodyAnimation.body[i])
+		#$BodyAnimation.body[i].movetarget = cols[i]
 		cols[i].cut.disconnect(cut)
+	while($BodyAnimation.body.size() > length):
+		$BodyAnimation.body.pop_back()
+	$BodyAnimation.body[-1].prevseg = null
 	get_parent().add_child.call_deferred(body)
 
 func move(dir):
@@ -64,6 +71,17 @@ func move(dir):
 	elif(dir.x < 0): ray = %left
 	elif(dir.y > 0): ray = %down
 	else: ray = %up
+	
+	if(dir.y < 0):
+		var xpos = cols[0].position.x
+		var flag = false
+		for i in range(1,cols.size()):
+			if(abs(cols[i].position.x - xpos) <= 1e-6):
+				continue
+			flag = true
+			break
+		if(not flag):
+			return
 	
 	if(ray.is_colliding()):
 		return
@@ -123,6 +141,7 @@ func _physics_process(delta: float) -> void:
 	cols[0].ishead = true
 	cols[-1].isend = true
 	frameedit = false
+	$BodyAnimation.init = false
 	#print($CharacterBody2D.is_on_floor())
 
 

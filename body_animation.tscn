@@ -6,3 +6,7 @@
 script = ExtResource("1_4e3o1")
 
 [node name="segments" type="Node2D" parent="."]
+
+[node name="cool" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true

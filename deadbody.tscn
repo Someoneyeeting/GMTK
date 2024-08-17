@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://d357d31psslwy"]
+[gd_scene load_steps=3 format=3 uid="uid://d357d31psslwy"]
 
 [ext_resource type="PackedScene" uid="uid://x7fcq7gtpunw" path="res://fall.tscn" id="1_da01p"]
+[ext_resource type="PackedScene" uid="uid://ds17nl3p5my8v" path="res://body_animation.tscn" id="2_id2an"]
 
 [node name="deadbody" type="CharacterBody2D" groups=["body"]]
 
 [node name="fall" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_da01p")]
 target = NodePath("..")
+
+[node name="body" parent="." instance=ExtResource("2_id2an")]
+isdead = true

@@ -12,6 +12,9 @@ var movetarget = Vector2.ZERO
 var currentpos = Vector2.ZERO
 var nextseg : Sprite2D 
 var prevseg : Sprite2D
+var isdead = false
+var snapobj = null
+var init = false
 
 func _ready() -> void:
 	texture = segments["body"]
@@ -23,14 +26,12 @@ func move(pos):
 	movetarget = pos
 	if(ishead):
 		pass
-	$move.start()
+	if(init):
+		$move.start()
 
 func update_poses(pos):
-	return
-	if($move.is_stopped()):
-		print("updated")
-		currentpos = pos
-		global_position = pos
+	movetarget = pos
+	position = pos
 
 
 func easeing(x):
@@ -40,6 +41,10 @@ func easeing(x):
 		return (sqrt(1 - pow(-2 * x + 2, 2)) + 1) / 2
 
 func _physics_process(delta: float) -> void:
+	init = true
+	if(snapobj):
+		global_position = snapobj.global_position
+		return
 	if(ishead):
 		texture = segments["head"]
 	elif(isend):
@@ -50,6 +55,7 @@ func _physics_process(delta: float) -> void:
 	if(not $move.is_stopped()):
 		position = lerp(currentpos,movetarget,1 - easeing((float($move.time_left) / $move.wait_time)))
 	else:
+		
 		position = movetarget
 	
 	if(isend):
