@@ -123,8 +123,11 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Node2D.position = cols[0].position
-	velocity.y = 10 / delta
-	move_and_slide()
+	if(is_on_floor()):
+		velocity.y = -10
+	velocity.y += .5 / delta
+	if(velocity.y >= 0):
+		move_and_slide()
 	
 	while(cols.size() > length):
 		cols.pop_back()

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://tail.gd" id="1_8pf5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d52h"]
-size = Vector2(38, 38)
+size = Vector2(35, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ard08"]
 size = Vector2(38, 38)
@@ -16,6 +16,7 @@ shape = SubResource("RectangleShape2D_8d52h")
 script = ExtResource("1_8pf5f")
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 z_index = -310
 offset_left = -20.0
 offset_top = -20.0
