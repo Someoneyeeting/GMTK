@@ -15,7 +15,6 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		cut.emit(ind)
 	if(area.is_in_group("expand") and ishead):
 		extend.emit()
-		print("FUCKKING HIT")
 		area.get_parent().queue_free()
 
 func _on_area_2d_2_area_entered(area: Area2D) -> void:
