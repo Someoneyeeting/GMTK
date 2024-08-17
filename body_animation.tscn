@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds17nl3p5my8v"]
+
+[ext_resource type="Script" path="res://body_animation.gd" id="1_4e3o1"]
+
+[node name="BodyAnimation" type="Node2D"]
+script = ExtResource("1_4e3o1")
+
+[node name="segments" type="Node2D" parent="."]

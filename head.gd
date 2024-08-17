@@ -24,13 +24,17 @@ func add_tail(tail = null):
 	tail.modulate = lerp(Color.WHITE,Color.BLACK,float(cols.size()) / length)
 	tail.cut.connect(cut)
 	tail.extend.connect(extend)
+	$BodyAnimation.add_body(tail.global_position)
+	
 	return tail
-	
+
+func get_body_poses():
+	var pos = []
+	for i in cols:
+		pos.append(i.position)
+	return pos
+
 func _ready() -> void:
-	
-	#for i in length:
-		#add_tail()
-	
 	add_tail($tail)
 	$rayspos.reparent(cols[0])
 
@@ -72,6 +76,7 @@ func move(dir):
 	for i in min(cols.size(),poses.size()):
 		cols[i].position += poses[i]
 	lastdir = dir
+	$BodyAnimation.move()
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dp2vhif6o5g6h"]
+
+[ext_resource type="Script" path="res://body_seg.gd" id="1_vp0df"]
+
+[node name="bodySeg" type="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+script = ExtResource("1_vp0df")
+
+[node name="move" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="move" to="." method="_on_move_timeout"]
