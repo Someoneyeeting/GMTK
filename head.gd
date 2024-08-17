@@ -98,7 +98,7 @@ func move(dir):
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
-	if(not is_on_floor() or not $cooldown.is_stopped()):
+	if(not is_on_floor()):
 		return
 	if(event.is_action_pressed("right")):
 		dir.x = grid_scale.x
@@ -112,12 +112,12 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	#frameedit = true
-	move(dir)
-	#plannedmoves.append(dir)
+	#move(dir)
+	plannedmoves.append(dir)
 	if($cooldown.is_stopped()):
 		_on_cooldown_timeout()
 		$cooldown.start()
-	if(plannedmoves.size() >= 3):
+	if(plannedmoves.size() >= 2):
 		plannedmoves.pop_front()
 	
 

@@ -30,8 +30,8 @@ func add_body(pos,tail :Sprite2D= null):
 	else:
 		body.insert(1,tail)
 	
-	if(not init):
-		move()
+	#if(not init):
+		#move()
 	return tail
 
 func move():
