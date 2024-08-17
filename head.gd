@@ -88,8 +88,8 @@ func move(dir):
 	off += dir
 	poses.insert(0,dir)
 	#$CollisionShape2D.position = off
-	while(poses.size() > cols.size() + 1):
-		poses.pop_back()
+	#while(poses.size() > cols.size() + 1):
+		#poses.pop_back()
 	
 	for i in min(cols.size(),poses.size()):
 		cols[i].position += poses[i]
@@ -98,7 +98,7 @@ func move(dir):
 
 func _input(event: InputEvent) -> void:
 	var dir = Vector2.ZERO
-	if(not is_on_floor()):
+	if(not is_on_floor() or not $cooldown.is_stopped()):
 		return
 	if(event.is_action_pressed("right")):
 		dir.x = grid_scale.x
@@ -112,7 +112,8 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	#frameedit = true
-	plannedmoves.append(dir)
+	move(dir)
+	#plannedmoves.append(dir)
 	if($cooldown.is_stopped()):
 		_on_cooldown_timeout()
 		$cooldown.start()

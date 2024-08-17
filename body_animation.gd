@@ -25,7 +25,7 @@ func add_body(pos,tail :Sprite2D= null):
 		tail.reparent.call_deferred($segments)
 	tail.position = pos
 	tail.movetarget = pos
-	if(body.is_empty()):
+	if(body.is_empty() or true):
 		body.append(tail)
 	else:
 		body.insert(1,tail)
@@ -40,20 +40,23 @@ func move():
 	poses = parent.get_body_poses()
 	for i in body.size():
 		body[i].move(poses[i])
-		if(i != 0):
-			body[i].nextseg = body[i - 1]
-		if(i != body.size() - 1):
-			body[i].prevseg = body[i + 1]
-		body[i].ishead = false
-		body[i].isend = false
-	body[0].ishead = true
-	body[-1].isend = true
 	$cool.start()
 
 func _physics_process(delta: float) -> void:
 	if(isdead):
 		for i in body:
 			i.isdead = true
+	
+	for i in body.size():
+		if(i != 0):
+			body[i].nextseg = body[i - 1]
+		if(i != body.size() - 1):
+			body[i].prevseg = body[i + 1]
+		
+		body[i].ishead = false
+		body[i].isend = false
+	body[0].ishead = true
+	body[-1].isend = true
 	if(parent):
 		poses = parent.get_body_poses()
 		#if($cool.is_stopped()):
