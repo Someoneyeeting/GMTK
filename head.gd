@@ -37,7 +37,7 @@ func _ready() -> void:
 func extend():
 	var t = add_tail()
 	t.position -= poses[-1]
-	plannedmoves.append(lastdir)
+	#plannedmoves.append(lastdir)
 	#move(lastdir)
 	length += 1
 	
@@ -66,7 +66,7 @@ func move(dir):
 	off += dir
 	poses.insert(0,dir)
 	#$CollisionShape2D.position = off
-	while(poses.size() > cols.size()):
+	while(poses.size() > cols.size() + 1):
 		poses.pop_back()
 	
 	for i in min(cols.size(),poses.size()):
