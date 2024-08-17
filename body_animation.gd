@@ -48,6 +48,7 @@ func _physics_process(delta: float) -> void:
 			i.isdead = true
 	
 	for i in body.size():
+		body[i].id = i
 		if(i != 0):
 			body[i].nextseg = body[i - 1]
 		if(i != body.size() - 1):

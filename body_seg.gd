@@ -1,9 +1,9 @@
 extends Sprite2D
 
 const segments = {
-	"head" : preload("res://assets/head.png"),
-	"body" : preload("res://assets/segment.png"),
-	"tail" : preload("res://assets/tail.png")
+	"head" : preload("res://assets/headsegment.png"),
+	"body" : preload("res://assets/bodysegment.png"),
+	"tail" : preload("res://assets/tailsegment.png")
 }
 
 var ishead = false
@@ -15,9 +15,11 @@ var prevseg : Sprite2D
 var isdead = false
 var snapobj = null
 var init = false
+var id = -1
 
 func _ready() -> void:
-	texture = segments["body"]
+	#texture = segments["body"]
+	$ColorRect.hide()
 	currentpos = position
 	movetarget = currentpos
 
@@ -45,12 +47,23 @@ func _physics_process(delta: float) -> void:
 	if(snapobj):
 		global_position = snapobj.global_position
 		return
+	$head.hide()
+	$body.hide()
+	$tail.hide()
+	$Diamondpip.hide()
+	$Arrow.hide()
+	if(id % 5 == 0):
+		$Diamondpip.show()
+	$Circlepip.visible = not $Diamondpip.visible
 	if(ishead):
-		texture = segments["head"]
+		$head.show()
+		$Diamondpip.hide()
+		$Circlepip.hide()
 	elif(isend):
-		texture = segments["tail"]
+		$tail.show()
 	else:
-		texture = segments["body"]
+		$body.show()
+		$Arrow.show()
 	#print($move.time_left, $move.wait_time)
 	if(not $move.is_stopped()):
 		position = lerp(currentpos,movetarget,1 - easeing((float($move.time_left) / $move.wait_time)))
