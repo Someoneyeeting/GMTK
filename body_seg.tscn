@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp2vhif6o5g6h"]
+[gd_scene load_steps=7 format=3 uid="uid://dp2vhif6o5g6h"]
 
 [ext_resource type="Script" path="res://body_seg.gd" id="1_vp0df"]
 [ext_resource type="Texture2D" uid="uid://ecwjk0y4urr0" path="res://assets/headsegment.png" id="2_563eh"]
 [ext_resource type="Texture2D" uid="uid://brrmpxg5q2rsj" path="res://assets/bodysegment.png" id="3_6y7ux"]
 [ext_resource type="Texture2D" uid="uid://c20q7dluuwpkb" path="res://assets/tailsegment.png" id="4_d45kp"]
-[ext_resource type="Texture2D" uid="uid://djy6gd1dx3eua" path="res://assets/diamondpip.png" id="5_rrw4d"]
-[ext_resource type="Texture2D" uid="uid://djqdmw2h2a4jk" path="res://assets/circlepip.png" id="6_ih0ey"]
 [ext_resource type="Texture2D" uid="uid://c1vwfajxug8us" path="res://assets/arrow.png" id="7_00ofg"]
+[ext_resource type="Texture2D" uid="uid://dm46ofmst7hyc" path="res://assets/curvedarrow.png" id="7_buvll"]
 
 [node name="bodySeg" type="Sprite2D"]
 script = ExtResource("1_vp0df")
@@ -42,18 +41,23 @@ texture = ExtResource("4_d45kp")
 visible = false
 position = Vector2(21, -5.96046e-08)
 scale = Vector2(0.517453, 0.517453)
-texture = ExtResource("5_rrw4d")
 
 [node name="Circlepip" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(21, 0)
 scale = Vector2(0.508656, 0.508656)
-texture = ExtResource("6_ih0ey")
 
-[node name="Arrow" type="Sprite2D" parent="."]
+[node name="curve" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.278431)
 position = Vector2(-3.57628e-07, -1.19209e-07)
-scale = Vector2(0.383541, 0.383541)
+rotation = -1.57079
+scale = Vector2(0.220048, 0.220048)
+texture = ExtResource("7_buvll")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(0.854902, 0.0941176, 0.0941176, 0.278431)
+position = Vector2(-1, 0)
+scale = Vector2(0.236799, 0.236799)
 texture = ExtResource("7_00ofg")
 
 [connection signal="timeout" from="move" to="." method="_on_move_timeout"]

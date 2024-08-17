@@ -64,6 +64,16 @@ func _physics_process(delta: float) -> void:
 	else:
 		$body.show()
 		$Arrow.show()
+		var localprev :Vector2 = (prevseg.movetarget - movetarget).normalized()
+		var localnext :Vector2 = (nextseg.movetarget - movetarget).normalized()
+		var cross = localprev.cross(localnext)
+		if(cross == 0):
+			$Arrow.show()
+			$curve.hide()
+		else:
+			$curve.show()
+			$Arrow.hide()
+			$curve.flip_h = cross < 0
 	#print($move.time_left, $move.wait_time)
 	if(not $move.is_stopped()):
 		position = lerp(currentpos,movetarget,1 - easeing((float($move.time_left) / $move.wait_time)))
