@@ -41,3 +41,8 @@ hit_from_inside = true
 remote_path = NodePath("../Node2D")
 
 [node name="tail" parent="." instance=ExtResource("2_2qmoa")]
+
+[node name="cooldown" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

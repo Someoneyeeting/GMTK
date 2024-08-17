@@ -2,7 +2,7 @@ extends CollisionShape2D
 
 
 
-signal cut(ind)
+signal cut(ind,delseg)
 signal extend
 
 var ind = -1
@@ -12,7 +12,7 @@ var isend = false
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("cut")):
-		cut.emit(ind)
+		cut.emit(ind,false)
 	if(area.is_in_group("longer") and ishead):
 		extend.emit()
 		area.queue_free()
