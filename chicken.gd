@@ -31,7 +31,7 @@ func move():
 	position.x = currentpos
 	$Sprite.global_position = global_position
 	movetarget = currentpos + dir * 40
-	global_position += 40 * dir
+	global_position.x += 40 * dir
 
 func _physics_process(delta: float) -> void:
 	t += delta * 12 * mult
@@ -85,7 +85,3 @@ func _on_eaten_area_entered(area: Area2D) -> void:
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	queue_free()
-
-
-func _on_timer_timeout() -> void:
-	pass # Replace with function body.

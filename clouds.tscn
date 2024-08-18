@@ -23,6 +23,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 0.2
 scale_curve = SubResource("CurveTexture_2xi6o")
+color = Color(0.75118, 0.75118, 0.75118, 1)
 
 [node name="Node2D" type="Node2D"]
 
@@ -31,7 +32,7 @@ position = Vector2(4, -1)
 amount = 808
 process_material = SubResource("ParticleProcessMaterial_dyixw")
 texture = ExtResource("1_kduui")
-lifetime = 10.0
+lifetime = 6.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false

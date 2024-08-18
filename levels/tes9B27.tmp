@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=4 uid="uid://cb0pi3jpy83iu"]
+[gd_scene load_steps=7 format=4 uid="uid://cb0pi3jpy83iu"]
 
 [ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://tilemaps/ground.tscn" id="1_2m8yi"]
 [ext_resource type="PackedScene" uid="uid://bvvlp1s3e87dj" path="res://tilemaps/scenes.tscn" id="2_qv2r3"]
 [ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://head.tscn" id="3_3i20d"]
 [ext_resource type="PackedScene" uid="uid://c74k00wdcpco0" path="res://chicken.tscn" id="4_1tslf"]
-[ext_resource type="PackedScene" uid="uid://dlee7qqkhtk3v" path="res://clouds.tscn" id="5_7fav6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6krh5"]
 
@@ -13,28 +12,16 @@ script/source = "extends Node2D
 
 
 const CLOUD = preload(\"res://clouds.tscn\")
-var spawnpos = 0
-
-
-func _ready() -> void:
-	for i in get_children():
-		if(i is not Timer):
-			i.show()
 
 func _physics_process(delta: float) -> void:
 	for i in get_children():
 		if(i is not Timer):
-			i.position.x -= delta * 10
+			i.position.x -= 3
 
 func _on_timer_timeout() -> void:
-	spawnpos = randf_range(100,650)
+	position.y = randf_range(20,1000)
 	var part = CLOUD.instantiate()
-	part.global_position.x = 1300
-	part.global_position.y = spawnpos
-	var dist = max(0.2,randf() * 2)
-	#part.scale = Vector2(dist,dist) / 2
-	#part.modulate.a = dist / 10.0 + 2/10.0
-	part.z_index = -dist * 100
+	part.global_position = global_position
 	add_child(part)
 	
 "
@@ -68,40 +55,10 @@ position = Vector2(981, 94)
 shape = SubResource("RectangleShape2D_6krh5")
 
 [node name="cloudspawn" type="Node2D" parent="."]
+position = Vector2(1364, 280)
 script = SubResource("GDScript_eei3c")
 
 [node name="Timer" type="Timer" parent="cloudspawn"]
-wait_time = 5.0
 autostart = true
-
-[node name="Node2D2" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(774, 252)
-
-[node name="Node2D3" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(1162, 524)
-
-[node name="Node2D4" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(350, 202)
-
-[node name="Node2D5" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(350, 570)
-
-[node name="Node2D6" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(766, 456)
-
-[node name="Node2D7" parent="cloudspawn" instance=ExtResource("5_7fav6")]
-visible = false
-z_index = -115
-position = Vector2(542, 130)
 
 [connection signal="timeout" from="cloudspawn/Timer" to="cloudspawn" method="_on_timer_timeout"]
