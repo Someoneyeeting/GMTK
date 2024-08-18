@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp2vhif6o5g6h"]
+[gd_scene load_steps=11 format=3 uid="uid://dp2vhif6o5g6h"]
 
 [ext_resource type="Script" path="res://body_seg.gd" id="1_vp0df"]
 [ext_resource type="Texture2D" uid="uid://bbvrwh1l04g3l" path="res://assets/jeff/headthick.png" id="2_avdkk"]
@@ -9,6 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://c1vwfajxug8us" path="res://assets/arrow.png" id="7_00ofg"]
 [ext_resource type="Texture2D" uid="uid://irwh6lngldt2" path="res://assets/jeff/tailthick.png" id="7_1ac8w"]
 [ext_resource type="Texture2D" uid="uid://cuvrohafnnjxa" path="res://assets/jeff/curvethick.png" id="8_pniru"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ol7wp"]
+size = Vector2(36, 14.1812)
 
 [node name="bodySeg" type="Sprite2D"]
 scale = Vector2(1.26928, 1.26928)
@@ -82,4 +85,11 @@ position = Vector2(-1, 0)
 scale = Vector2(0.236799, 0.236799)
 texture = ExtResource("7_00ofg")
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_ol7wp")
+
 [connection signal="timeout" from="move" to="." method="_on_move_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

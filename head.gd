@@ -152,6 +152,10 @@ func _physics_process(delta: float) -> void:
 		cols[i].isend = false
 		cols[i].ind = i
 		cols[i].modulate = lerp(Color.GREEN,Color.RED,float(i) / cols.size())
+		if(i == 0):
+			continue
+		if(i < poses.size()):
+			cols[i].global_position = cols[i - 1].global_position - poses[i - 1]
 	length = cols.size()
 	cols[0].ishead = true
 	cols[-1].isend = true

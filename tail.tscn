@@ -5,11 +5,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d52h"]
 size = Vector2(30, 36)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ard08"]
-size = Vector2(34, 38)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oaae4"]
 size = Vector2(150, 150)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b7awa"]
+size = Vector2(50, 50)
 
 [node name="tail" type="CollisionShape2D" groups=["tail"]]
 shape = SubResource("RectangleShape2D_8d52h")
@@ -23,17 +23,20 @@ offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_ard08")
-
-[node name="attention" type="Area2D" parent="."]
+[node name="attention" type="Area2D" parent="." groups=["squish"]]
+visible = false
 collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attention"]
 shape = SubResource("RectangleShape2D_oaae4")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="chicken" type="Area2D" parent="." groups=["wall"]]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="chicken"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_b7awa")
+
 [connection signal="area_entered" from="attention" to="." method="_on_attention_area_entered"]
 [connection signal="body_entered" from="attention" to="." method="_on_attention_body_entered"]

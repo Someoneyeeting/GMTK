@@ -29,6 +29,8 @@ window/stretch/mode="canvas_items"
 
 expand=""
 attention=""
+wall=""
+squish=""
 
 [input]
 

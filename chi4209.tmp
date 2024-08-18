@@ -1,25 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c74k00wdcpco0"]
+[gd_scene load_steps=4 format=3 uid="uid://c74k00wdcpco0"]
 
 [ext_resource type="Script" path="res://chicken.gd" id="1_7f3wq"]
-[ext_resource type="Texture2D" uid="uid://blp2phco0anl6" path="res://assets/chuck/ChickenRightWalk01.png" id="2_0s2c6"]
-[ext_resource type="Texture2D" uid="uid://bwwknvmk4d06c" path="res://assets/chuck/ChickenRightWalk02.png" id="3_1pcya"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wcol"]
-size = Vector2(40, 40)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_am586"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_0s2c6")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_1pcya")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+size = Vector2(40, 37.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_du4vd"]
 size = Vector2(40, 37.5)
@@ -34,10 +18,13 @@ script = ExtResource("1_7f3wq")
 scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_7wcol")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -3.75)
-scale = Vector2(0.222346, 0.222346)
-sprite_frames = SubResource("SpriteFrames_am586")
+[node name="ColorRect" type="ColorRect" parent="." groups=["expand"]]
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+pivot_offset = Vector2(20, 30)
+color = Color(0.980469, 0.758331, 0, 1)
 
 [node name="idle" type="Timer" parent="."]
 wait_time = 3.0
