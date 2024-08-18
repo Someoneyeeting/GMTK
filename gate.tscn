@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dp0l7ck638dt8"]
+[gd_scene load_steps=10 format=3 uid="uid://dp0l7ck638dt8"]
 
 [ext_resource type="Script" path="res://gate.gd" id="1_fvxuu"]
 [ext_resource type="Texture2D" uid="uid://c2r4w7qnkw245" path="res://gatebase.png" id="1_w4m5v"]
@@ -83,6 +83,9 @@ size = Vector2(16, 20)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cad51"]
 size = Vector2(18, 70)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12kxs"]
+size = Vector2(20, 27)
+
 [node name="gate" type="Node2D"]
 script = ExtResource("1_fvxuu")
 
@@ -117,3 +120,7 @@ disabled = true
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_cad51")
 disabled = true
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -20.5)
+shape = SubResource("RectangleShape2D_12kxs")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cb0pi3jpy83iu"]
+[gd_scene load_steps=15 format=4 uid="uid://cb0pi3jpy83iu"]
 
 [ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://tilemaps/ground.tscn" id="1_2m8yi"]
 [ext_resource type="PackedScene" uid="uid://bvvlp1s3e87dj" path="res://tilemaps/scenes.tscn" id="2_qv2r3"]
@@ -62,6 +62,31 @@ func _on_timer_timeout() -> void:
 	
 "
 
+[sub_resource type="Shader" id="Shader_3bkkq"]
+code = "shader_type canvas_item;
+
+
+uniform sampler2D noise : repeat_enable;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	float off = texture(noise,UV + vec2(-TIME/4.3,0)).r;
+	
+	COLOR.rgb = vec3(off + 0.4);
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qf070"]
+shader = SubResource("Shader_3bkkq")
+
 [node name="Node2D" type="Node2D"]
 
 [node name="Node2D" type="Node2D" parent="."]
@@ -89,7 +114,7 @@ target = NodePath("../gate")
 
 [node name="head" parent="." instance=ExtResource("3_3i20d")]
 position = Vector2(20, 420)
-length = 5
+length = 9
 
 [node name="Area2D" type="Area2D" parent="." groups=["wall"]]
 collision_layer = 2
@@ -146,10 +171,11 @@ z_index = -1005
 
 [node name="ColorRect" type="ColorRect" parent="."]
 z_index = -1
+material = SubResource("ShaderMaterial_qf070")
 offset_left = -28.0
 offset_top = -52.0
 offset_right = 1310.0
 offset_bottom = 770.0
-color = Color(1, 1, 1, 0.435294)
+color = Color(0.737603, 0.737603, 0.737603, 0.435294)
 
 [connection signal="timeout" from="cloudspawn/Timer" to="cloudspawn" method="_on_timer_timeout"]
