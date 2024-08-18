@@ -53,10 +53,10 @@ func cut(ind,delseg = true):
 		return
 	length = ind
 	if(delseg):
-		cols[ind].queue_free()
+		cols[ind].queue_free.call_deferred()
 		$BodyAnimation.body[ind].queue_free.call_deferred()
 	var body = BODY.instantiate()
-	for i in range(ind + int(delseg),cols.size()):
+	for i in range(ind + (1 if delseg else 0),cols.size()):
 		cols[i].reparent.call_deferred(body)
 		$BodyAnimation.body[i].snapobj = cols[i]
 		body.get_node("body").add_body(cols[i].position,$BodyAnimation.body[i])

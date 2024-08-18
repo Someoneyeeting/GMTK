@@ -21,3 +21,14 @@ func _physics_process(delta: float) -> void:
 			if(i.is_in_group("attention")):
 				get_parent().target = i.global_position
 				break
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("cut")):
+		cut.emit(ind)
+	return
+	if(area.is_in_group("expand")):
+		if(ishead):
+			extend.emit()
+		else:
+			print("squish")

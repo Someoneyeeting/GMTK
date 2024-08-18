@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://0eob1v8xpjxi"]
+
+[ext_resource type="Texture2D" uid="uid://cbgyqbur4dy43" path="res://assets/background/waterfall.png" id="1_6xcf2"]
+[ext_resource type="Material" uid="uid://cwe8lvbbfyo63" path="res://anotherwater.tres" id="1_ecedw"]
+[ext_resource type="Texture2D" uid="uid://dikydln4yko3l" path="res://assets/background/Untitled388_20240818134220.png" id="2_2wkwq"]
+[ext_resource type="Material" uid="uid://d4c0npenrnhd5" path="res://water.tres" id="2_ny5c7"]
+
+[node name="background" type="Node2D"]
+scale = Vector2(2, 2)
+
+[node name="Waterfall" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = ExtResource("1_ecedw")
+texture = ExtResource("1_6xcf2")
+centered = false
+
+[node name="Untitled38820240818134220" type="Sprite2D" parent="."]
+texture_repeat = 2
+material = ExtResource("2_ny5c7")
+texture = ExtResource("2_2wkwq")
+centered = false
+region_enabled = true
+region_rect = Rect2(0, -26.47, 640, 360)

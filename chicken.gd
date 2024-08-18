@@ -48,8 +48,6 @@ func _physics_process(delta: float) -> void:
 		#movetarget = currentpos
 		#velocity.x = 0
 		#dir *= -1
-	if(is_on_ceiling()):
-		print("squish")
 	
 	
 	yoff = lerp(yoff,abs(sin(Manger.timer.time_left / Manger.timer.wait_time * PI * 1)) * -10.0,0.4)
@@ -78,7 +76,7 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		pass
 
 func _on_eaten_area_entered(area: Area2D) -> void:
-	if(area.is_in_group("tail")):
+	if(area.is_in_group("squish")):
 		if(area.get_parent().ishead):
 			area.get_parent().extend.emit()
 		var part = PART.instantiate()

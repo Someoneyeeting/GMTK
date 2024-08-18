@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dp0l7ck638dt8"]
+[gd_scene load_steps=9 format=3 uid="uid://dp0l7ck638dt8"]
 
 [ext_resource type="Script" path="res://gate.gd" id="1_fvxuu"]
 [ext_resource type="Texture2D" uid="uid://c2r4w7qnkw245" path="res://gatebase.png" id="1_w4m5v"]
@@ -6,6 +6,7 @@
 
 [sub_resource type="Animation" id="Animation_le654"]
 resource_name = "close"
+length = 0.254
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -13,7 +14,7 @@ tracks/0/path = NodePath("Gate:region_rect")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.0653606),
 "transitions": PackedFloat32Array(4.43828, 1),
 "update": 0,
 "values": [Rect2(80, 144.95, 40, 141.12), Rect2(80, 20, 40, 141.12)]
@@ -25,10 +26,22 @@ tracks/1/path = NodePath("cut/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0753916),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.0713164),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [false]
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StaticBody2D/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0957677),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
 }
 
 [sub_resource type="Animation" id="Animation_sradm"]
@@ -67,6 +80,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu1mt"]
 size = Vector2(16, 20)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cad51"]
+size = Vector2(18, 70)
+
 [node name="gate" type="Node2D"]
 script = ExtResource("1_fvxuu")
 
@@ -76,6 +92,7 @@ scale = Vector2(0.527993, 0.527993)
 texture = ExtResource("1_w4m5v")
 
 [node name="Gate" type="Sprite2D" parent="."]
+texture_repeat = 1
 position = Vector2(0, 3)
 scale = Vector2(0.519696, 0.519696)
 texture = ExtResource("2_whgg4")
@@ -87,9 +104,16 @@ libraries = {
 "": SubResource("AnimationLibrary_yisqr")
 }
 
-[node name="cut" type="Area2D" parent="."]
+[node name="cut" type="Area2D" parent="." groups=["cut"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="cut"]
 position = Vector2(0, 25)
 shape = SubResource("RectangleShape2D_gu1mt")
+disabled = true
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" groups=["cut"]]
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_cad51")
 disabled = true

@@ -101,15 +101,3 @@ func _physics_process(delta: float) -> void:
 
 func _on_move_timeout() -> void:
 	currentpos = movetarget
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	return
-	if(area.is_in_group("cut")):
-		get_parent().get_parent().parent.cut(id)
-	if(area.is_in_group("expand")):
-		if(ishead):
-			get_parent().get_parent().parent.extend()
-			area.get_parent().queue_free()
-		else:
-			print("squish")

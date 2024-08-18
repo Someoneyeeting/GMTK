@@ -23,12 +23,12 @@ gravity = Vector3(0, 0, 0)
 scale_min = 0.0
 scale_max = 0.2
 scale_curve = SubResource("CurveTexture_2xi6o")
-color = Color(0.75118, 0.75118, 0.75118, 1)
 
 [node name="Node2D" type="Node2D"]
 
 [node name="parts" type="GPUParticles2D" parent="."]
 position = Vector2(4, -1)
+scale = Vector2(0.692897, 0.289263)
 amount = 808
 process_material = SubResource("ParticleProcessMaterial_dyixw")
 texture = ExtResource("1_kduui")

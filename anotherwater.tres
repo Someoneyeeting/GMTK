@@ -1,0 +1,43 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://cwe8lvbbfyo63"]
+
+[sub_resource type="Shader" id="Shader_bqs68"]
+code = "shader_type canvas_item;
+
+
+uniform sampler2D noise : repeat_enable;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	float off = texture(noise,vec2(UV.x,UV.y - TIME / 5.0)).r;
+	off = texture(noise,vec2(UV.x + off * 5.0 * UV.y / 20.0,UV.y - TIME / 5.0)).r;
+	vec4 clr = texture(TEXTURE,UV + vec2(off / 10.0,-TIME));
+	
+	if(off + 1.0 >= 1.45)
+		clr.rgb = (clr.rgb / length(clr.rgb)) * min(off + 1.0,length(clr.rgb));
+	COLOR = clr;
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_eq1ld"]
+seed = 60
+frequency = 0.002
+fractal_octaves = 4
+fractal_lacunarity = 2.94
+fractal_gain = -0.555
+domain_warp_enabled = true
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_q02iq"]
+seamless = true
+noise = SubResource("FastNoiseLite_eq1ld")
+
+[resource]
+shader = SubResource("Shader_bqs68")
+shader_parameter/noise = SubResource("NoiseTexture2D_q02iq")

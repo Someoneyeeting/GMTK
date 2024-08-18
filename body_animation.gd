@@ -46,6 +46,7 @@ func _physics_process(delta: float) -> void:
 	if(isdead):
 		for i in body:
 			i.isdead = true
+		return
 	
 	for i in body.size():
 		body[i].id = i

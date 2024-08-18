@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dkydwjjfqggw2" path="res://tail.tscn" id="2_2qmoa"]
 [ext_resource type="PackedScene" uid="uid://ds17nl3p5my8v" path="res://body_animation.tscn" id="2_in4nm"]
 
-[node name="head" type="CharacterBody2D" groups=["squish"]]
+[node name="head" type="CharacterBody2D" groups=["press", "squish"]]
 collision_layer = 3
 script = ExtResource("1_qru2w")
 length = 15
