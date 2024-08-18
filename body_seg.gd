@@ -104,6 +104,7 @@ func _on_move_timeout() -> void:
 
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
+	return
 	if(area.is_in_group("cut")):
 		get_parent().get_parent().parent.cut(id)
 	if(area.is_in_group("expand")):

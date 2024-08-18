@@ -1,0 +1,42 @@
+[gd_scene load_steps=3 format=3 uid="uid://c17roh8aaxlts"]
+
+[sub_resource type="GDScript" id="GDScript_5ij8o"]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	$GPUParticles2D.emitting = true
+
+
+
+func _on_gpu_particles_2d_finished() -> void:
+	queue_free()
+"
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_7nj6y"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+initial_velocity_max = 64.52
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 123.87
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 98, 0)
+scale_max = 3.0
+
+[node name="feathers" type="Node2D"]
+script = SubResource("GDScript_5ij8o")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_7nj6y")
+lifetime = 10.0
+one_shot = true
+explosiveness = 1.0
+
+[connection signal="finished" from="GPUParticles2D" to="." method="_on_gpu_particles_2d_finished"]

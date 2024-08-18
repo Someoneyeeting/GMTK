@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c74k00wdcpco0"]
+[gd_scene load_steps=11 format=3 uid="uid://c74k00wdcpco0"]
 
 [ext_resource type="Script" path="res://chicken.gd" id="1_7f3wq"]
 [ext_resource type="Texture2D" uid="uid://blp2phco0anl6" path="res://assets/chuck/ChickenRightWalk01.png" id="2_0s2c6"]
@@ -23,6 +23,70 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_du4vd"]
 size = Vector2(40, 37.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0vec5"]
+size = Vector2(35, 32.5)
+
+[sub_resource type="Animation" id="Animation_04kvy"]
+resource_name = "Die"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 0.333333),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Vector2(0.222, 0.2), Vector2(0.222, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.233333),
+"transitions": PackedFloat32Array(0.176777, 1),
+"update": 0,
+"values": [Vector2(0, -4.76837e-07), Vector2(0, 15)]
+}
+
+[sub_resource type="Animation" id="Animation_200jg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.222346, 0.222346)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -3.75)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7iulw"]
+_data = {
+"Die": SubResource("Animation_04kvy"),
+"RESET": SubResource("Animation_200jg")
+}
 
 [node name="Chicken" type="CharacterBody2D" groups=["attention"]]
 scale = Vector2(0.8, 0.8)
@@ -54,4 +118,18 @@ shape = SubResource("RectangleShape2D_du4vd")
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
+[node name="eaten" type="Area2D" parent="."]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="eaten"]
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_0vec5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7iulw")
+}
+speed_scale = 0.3
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="eaten" to="." method="_on_eaten_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
