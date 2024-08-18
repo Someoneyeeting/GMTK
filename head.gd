@@ -94,6 +94,7 @@ func move(dir):
 	for i in min(cols.size(),poses.size()):
 		cols[i].position += poses[i]
 	lastdir = dir
+	Manger.move.emit()
 	$BodyAnimation.move()
 
 func _input(event: InputEvent) -> void:

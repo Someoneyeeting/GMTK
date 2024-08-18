@@ -59,20 +59,26 @@ func _physics_process(delta: float) -> void:
 		$head.show()
 		$Diamondpip.hide()
 		$Circlepip.hide()
+		var targetpos = get_viewport().get_mouse_position()
+		var mid :Vector2= $head/Sprite2D/leftpos.global_position + $head/Sprite2D/rightpos.global_position
+		mid /= 2
+		var dir = mid.direction_to(targetpos)
+		$head/Sprite2D/RightEye.global_position = $head/Sprite2D/rightpos.global_position + dir * 2.5
+		$head/Sprite2D/LeftEye.global_position = $head/Sprite2D/leftpos.global_position + dir * 2
 	elif(isend):
 		$tail.show()
 	else:
-		$body.show()
-		$Arrow.show()
+		#$Arrow.show()
 		var localprev :Vector2 = (prevseg.movetarget - movetarget).normalized()
 		var localnext :Vector2 = (nextseg.movetarget - movetarget).normalized()
 		var cross = localprev.cross(localnext)
 		if(cross == 0):
-			$Arrow.show()
+			#$Arrow.show()
 			$curve.hide()
+			$body.show()
 		else:
 			$curve.show()
-			$Arrow.hide()
+			#$Arrow.hide()
 			$curve.flip_h = cross < 0
 	#print($move.time_left, $move.wait_time)
 	if(not $move.is_stopped()):

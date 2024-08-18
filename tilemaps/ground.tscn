@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=4 uid="uid://bh8jf4ley7tw5"]
+
+[ext_resource type="Texture2D" uid="uid://du5630qiuykhs" path="res://assets/ground texture.png" id="1_pryns"]
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_t0so4"]
+tile_data = PackedInt32Array(0, 1, 268435456, 1, 1, 268435456)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_ny21l"]
+tile_data = PackedInt32Array(0, 1, 268435456, 1, 1, 0)
+
+[sub_resource type="TileMapPattern" id="TileMapPattern_w6on1"]
+tile_data = PackedInt32Array(0, 6, 0, 1, 6, 268435456)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_bpo4f"]
+texture = ExtResource("1_pryns")
+texture_region_size = Vector2i(191, 191)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-100, -100, 100, -100, 100, 100, -100, 100)
+
+[sub_resource type="TileSet" id="TileSet_ncxhv"]
+tile_size = Vector2i(191, 191)
+physics_layer_0/collision_layer = 1
+sources/6 = SubResource("TileSetAtlasSource_bpo4f")
+pattern_0 = SubResource("TileMapPattern_t0so4")
+pattern_1 = SubResource("TileMapPattern_ny21l")
+pattern_2 = SubResource("TileMapPattern_w6on1")
+
+[node name="ground" type="TileMapLayer"]
+scale = Vector2(0.209, 0.209)
+tile_map_data = PackedByteArray("AAAAAA0ABgABAAAAAAACAA0ABgABAAAAAAAEAA0ABgADAAAAAAAGAA0ABgABAAAAAAAIAA0ABgABAAAAAAAKAA0ABgABAAAAAAAQAA0ABgAAAAAAABASAA0ABgAAAAAAAAAUAA0ABgAAAAAAABAWAA0ABgACAAAAAAAYAA0ABgACAAAAAAAOAAwABgAAAAEAAAAQAAwABgADAAAAAAASAAwABgAAAAEAAAABAA0ABgADAAAAAAADAA0ABgAAAAEAAAAFAA0ABgADAAAAAAAHAA0ABgABAAAAAAAJAA0ABgADAAAAAAAPAA0ABgAAAAAAABARAA0ABgAAAAAAAAATAA0ABgAAAAAAABAVAA0ABgADAAAAAAAXAA0ABgAAAAEAAAAPAAwABgAAAAEAAAARAAwABgABAAAAAAATAAwABgADAAAAAAD//w0ABgAAAAEAAAD+/w0ABgADAAAAAAAUAAwABgADAAEAABALAAwABgADAAEAAAALAA0ABgAAAAAAAAAMAA0ABgAAAAAAABANAA0ABgAAAAAAABAOAA0ABgAAAAAAABAMAAwABgABAAAAAAANAAwABgADAAAAAAA=")
+tile_set = SubResource("TileSet_ncxhv")

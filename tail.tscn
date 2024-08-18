@@ -3,10 +3,10 @@
 [ext_resource type="Script" path="res://tail.gd" id="1_8pf5f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8d52h"]
-size = Vector2(35, 38)
+size = Vector2(30, 36)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ard08"]
-size = Vector2(38, 38)
+size = Vector2(34, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oaae4"]
 size = Vector2(42, 42)
@@ -24,7 +24,6 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_ard08")

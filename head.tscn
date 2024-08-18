@@ -47,6 +47,6 @@ remote_path = NodePath("../Node2D")
 [node name="tail" parent="." instance=ExtResource("2_2qmoa")]
 
 [node name="cooldown" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.15
 
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]

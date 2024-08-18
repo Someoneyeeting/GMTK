@@ -1,13 +1,17 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp2vhif6o5g6h"]
+[gd_scene load_steps=10 format=3 uid="uid://dp2vhif6o5g6h"]
 
 [ext_resource type="Script" path="res://body_seg.gd" id="1_vp0df"]
-[ext_resource type="Texture2D" uid="uid://ecwjk0y4urr0" path="res://assets/headsegment.png" id="2_563eh"]
-[ext_resource type="Texture2D" uid="uid://brrmpxg5q2rsj" path="res://assets/bodysegment.png" id="3_6y7ux"]
-[ext_resource type="Texture2D" uid="uid://c20q7dluuwpkb" path="res://assets/tailsegment.png" id="4_d45kp"]
+[ext_resource type="Texture2D" uid="uid://bbvrwh1l04g3l" path="res://assets/jeff/headthick.png" id="2_avdkk"]
+[ext_resource type="Texture2D" uid="uid://dkx5n6uee7fyg" path="res://assets/jeff/eyesthick.png" id="3_f8glb"]
+[ext_resource type="Texture2D" uid="uid://bdauq0ldc4rsq" path="res://assets/jeff/right_eye.png" id="4_pm5cj"]
+[ext_resource type="Texture2D" uid="uid://ce8an3sso6o17" path="res://assets/jeff/left_eye.png" id="5_gc4sg"]
+[ext_resource type="Texture2D" uid="uid://dhx7iwfy356qt" path="res://assets/jeff/segmentthick.png" id="6_r58bj"]
 [ext_resource type="Texture2D" uid="uid://c1vwfajxug8us" path="res://assets/arrow.png" id="7_00ofg"]
-[ext_resource type="Texture2D" uid="uid://dm46ofmst7hyc" path="res://assets/curvedarrow.png" id="7_buvll"]
+[ext_resource type="Texture2D" uid="uid://irwh6lngldt2" path="res://assets/jeff/tailthick.png" id="7_1ac8w"]
+[ext_resource type="Texture2D" uid="uid://cuvrohafnnjxa" path="res://assets/jeff/curvethick.png" id="8_pniru"]
 
 [node name="bodySeg" type="Sprite2D"]
+scale = Vector2(1.26928, 1.26928)
 script = ExtResource("1_vp0df")
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -17,25 +21,42 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="move" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.2
 one_shot = true
 
 [node name="head" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(4, 0)
+position = Vector2(3.21215, 0.787846)
 scale = Vector2(0.272108, 0.272108)
-texture = ExtResource("2_563eh")
+texture = ExtResource("2_avdkk")
+
+[node name="Sprite2D" type="Sprite2D" parent="head"]
+position = Vector2(14.4767, 0)
+texture = ExtResource("3_f8glb")
+
+[node name="RightEye" type="Sprite2D" parent="head/Sprite2D"]
+position = Vector2(-26.2814, -22.7441)
+texture = ExtResource("4_pm5cj")
+
+[node name="LeftEye" type="Sprite2D" parent="head/Sprite2D"]
+position = Vector2(28.4497, -23.6141)
+texture = ExtResource("5_gc4sg")
+
+[node name="rightpos" type="Node2D" parent="head/Sprite2D"]
+position = Vector2(-26.2814, -22.7441)
+
+[node name="leftpos" type="Node2D" parent="head/Sprite2D"]
+position = Vector2(28.4497, -23.6141)
 
 [node name="body" type="Sprite2D" parent="."]
 position = Vector2(9.53674e-07, 0)
-scale = Vector2(0.272108, 0.272108)
-texture = ExtResource("3_6y7ux")
+scale = Vector2(0.247272, 0.247272)
+texture = ExtResource("6_r58bj")
 
 [node name="tail" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -4)
 scale = Vector2(0.272108, 0.272108)
-texture = ExtResource("4_d45kp")
+texture = ExtResource("7_1ac8w")
 
 [node name="Diamondpip" type="Sprite2D" parent="."]
 visible = false
@@ -48,13 +69,14 @@ position = Vector2(21, 0)
 scale = Vector2(0.508656, 0.508656)
 
 [node name="curve" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.278431)
+visible = false
 position = Vector2(-3.57628e-07, -1.19209e-07)
 rotation = -1.57079
 scale = Vector2(0.220048, 0.220048)
-texture = ExtResource("7_buvll")
+texture = ExtResource("8_pniru")
 
 [node name="Arrow" type="Sprite2D" parent="."]
+visible = false
 modulate = Color(0.854902, 0.0941176, 0.0941176, 0.278431)
 position = Vector2(-1, 0)
 scale = Vector2(0.236799, 0.236799)
