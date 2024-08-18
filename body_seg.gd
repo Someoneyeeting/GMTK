@@ -14,6 +14,7 @@ var nextseg : Sprite2D
 var prevseg : Sprite2D
 var isdead = false
 var snapobj = null
+var target : Vector2
 var init = false
 var id = -1
 
@@ -59,7 +60,7 @@ func _physics_process(delta: float) -> void:
 		$head.show()
 		$Diamondpip.hide()
 		$Circlepip.hide()
-		var targetpos = get_viewport().get_mouse_position()
+		var targetpos = get_viewport().get_mouse_position() if target == Vector2.ZERO else target
 		var mid :Vector2= $head/Sprite2D/leftpos.global_position + $head/Sprite2D/rightpos.global_position
 		mid /= 2
 		var dir = mid.direction_to(targetpos)

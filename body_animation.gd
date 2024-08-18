@@ -56,6 +56,7 @@ func _physics_process(delta: float) -> void:
 		
 		body[i].ishead = false
 		body[i].isend = false
+	body[0].target = parent.target
 	body[0].ishead = true
 	body[-1].isend = true
 	if(parent):

@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ds17nl3p5my8v" path="res://body_animation.tscn" id="2_in4nm"]
 
 [node name="head" type="CharacterBody2D"]
+collision_layer = 3
 script = ExtResource("1_qru2w")
 length = 15
 

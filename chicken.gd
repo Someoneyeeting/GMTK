@@ -25,10 +25,17 @@ func move():
 	currentpos = movetarget
 	position.x = currentpos
 	movetarget = currentpos + dir * 40
+	velocity.x = movetarget - currentpos
+	velocity.x /= Manger.timer.wait_time
 
 func _physics_process(delta: float) -> void:
 	t += delta * 12 * mult
+	velocity.y = 10 / delta
 	
+	if(is_on_ceiling()):
+		movetarget = currentpos
+		velocity.x = 0
+		dir *= -1
 	
 	if(Manger.timer.is_stopped()):
 		velocity.x = 0
@@ -37,10 +44,9 @@ func _physics_process(delta: float) -> void:
 		mult = lerp(mult,0.0,0.4)
 	else:
 		mult = lerp(mult,2.0,0.1)
-		position.x = lerp(currentpos,movetarget,1 - easeing(Manger.timer.time_left / Manger.timer.wait_time))
 	
 	$ColorRect.rotation_degrees = 10 * sin(t) * mult
-
+	move_and_slide()
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	dir *= -1

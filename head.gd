@@ -13,6 +13,8 @@ var off := Vector2.ZERO
 var lastdir = Vector2.ZERO
 var frameedit = false
 var plannedmoves = []
+var target : Vector2
+var toadd = 0
 
 func add_tail(tail = null,ext = false):
 	if(not tail):
@@ -39,8 +41,8 @@ func _ready() -> void:
 	$rayspos.reparent(cols[0])
 
 func extend():
-	var t = add_tail(null,true)
-	t.position -= poses[-1]
+	#var t = add_tail(null,true)
+	#t.position -= poses[-1]
 	#plannedmoves.append(lastdir)
 	#move(lastdir)
 	length += 1
@@ -125,6 +127,12 @@ func _input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$Node2D.position = cols[0].position
+	#target = Vector2.ZERO
+	#for i in [%left,%right,%down,%up]:
+		#i = i as RayCast2D
+		#if(i.is_colliding() and i.get_collider().is_in_group("attention")):
+			#target = i.get_collider().global_postiion
+			#break
 	if(is_on_floor()):
 		velocity.y = -10
 	velocity.y += .5 / delta
@@ -135,6 +143,8 @@ func _physics_process(delta: float) -> void:
 		cols.pop_back()
 	while(cols.size() < length):
 		var tail = add_tail()
+		if(not poses.is_empty()):
+			tail.position -= poses[-1]
 		#move(lastdir)
 	
 	for i in cols.size():
