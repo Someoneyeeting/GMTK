@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 
-var dir = 1
+@export var dir = 1
 @export var speed :float= 60
 var t = 0
 var panic = false
@@ -27,6 +27,8 @@ func _ready() -> void:
 	$Sprite.global_position = global_position
 
 func move():
+	if($AnimationPlayer.is_playing()):
+		return
 	currentpos = movetarget
 	position.x = currentpos
 	$Sprite.global_position = global_position
@@ -34,16 +36,18 @@ func move():
 	global_position.x += 40 * dir
 
 func _physics_process(delta: float) -> void:
+	if($AnimationPlayer.is_playing()):
+		return
 	t += delta * 12 * mult
 	velocity.y = 10 / delta
 	
 	#$CollisionShape2D.position.x = 40 * dir
 	$Sprite.global_position.x = lerp(currentpos,movetarget,1 - easeing(Manger.timer.time_left / Manger.timer.wait_time))
 	$Sprite.global_position.y = lerp($Sprite.global_position.y - 3.75 * 0.222 + yoff,global_position.y - 3.75 * 0.222,0.4)
-	if(is_on_wall()):
-		movetarget = currentpos
-		velocity.x = 0
-		dir *= -1
+	#if(is_on_wall()):
+		#movetarget = currentpos
+		#velocity.x = 0
+		#dir *= -1
 	if(is_on_ceiling()):
 		print("squish")
 	
@@ -80,6 +84,7 @@ func _on_eaten_area_entered(area: Area2D) -> void:
 		var part = PART.instantiate()
 		get_parent().add_child(part)
 		part.global_position = global_position + Vector2(0,20)
+		$Sprite.global_position = global_position
 		$AnimationPlayer.play("Die")
 
 
