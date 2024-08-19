@@ -88,6 +88,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		pass
 
 func _on_eaten_area_entered(area: Area2D) -> void:
+	if($AnimationPlayer.is_playing() and $AnimationPlayer.current_animation == "Die"):
+		return
 	if(area.is_in_group("squish")):
 		if(area.get_parent().ishead):
 			area.get_parent().extend.emit()

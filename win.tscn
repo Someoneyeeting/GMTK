@@ -13,7 +13,7 @@ offset_left = -20.0
 offset_top = -20.0
 offset_right = 20.0
 offset_bottom = 20.0
-color = Color(0, 0.589915, 1, 1)
+color = Color(0.164706, 0.470588, 0.690196, 1)
 
 [node name="lines" parent="." instance=ExtResource("1_wbc0c")]
 position = Vector2(-23, -20)

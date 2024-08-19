@@ -1,36 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://cfr0xsecvwkv1"]
+[gd_scene load_steps=7 format=3 uid="uid://cfr0xsecvwkv1"]
 
 [ext_resource type="Texture2D" uid="uid://br78lo7k7kox" path="res://assets/circle.png" id="1_nklcn"]
-
-[sub_resource type="Curve" id="Curve_myk0c"]
-_data = [Vector2(0, 0.483516), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.483516), 0.0, 0.0, 0, 0, Vector2(0.466667, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 4
 
 [sub_resource type="Gradient" id="Gradient_0l41h"]
 interpolation_mode = 1
 offsets = PackedFloat32Array(0, 0.5, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.868285, 0.983401, 1, 1, 1, 1, 1, 1)
 
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jy2n1"]
+gradient = SubResource("Gradient_0l41h")
+
+[sub_resource type="Curve" id="Curve_myk0c"]
+_data = [Vector2(0, 0.483516), 0.0, 0.0, 0, 0, Vector2(1e-05, 0.483516), 0.0, 0.0, 0, 0, Vector2(0.466667, 0.978022), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_8x3la"]
+curve = SubResource("Curve_myk0c")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qircg"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(50, 11.57, 0)
+angle_min = -720.0
+angle_max = 720.0
+initial_velocity_max = 1.25
+gravity = Vector3(0, 100, 0)
+scale_min = 0.0
+scale_max = 0.07
+scale_curve = SubResource("CurveTexture_8x3la")
+color_ramp = SubResource("GradientTexture1D_jy2n1")
+
 [node name="waterpart" type="Node2D"]
 
-[node name="GPUParticles2D" type="CPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(1, -5)
 amount = 108
+process_material = SubResource("ParticleProcessMaterial_qircg")
+texture = ExtResource("1_nklcn")
 lifetime = 0.6
 preprocess = 1.0
 speed_scale = 1.5
 randomness = 0.46
-fixed_fps = 30
 fract_delta = false
-draw_order = 1
-texture = ExtResource("1_nklcn")
-emission_shape = 3
-emission_rect_extents = Vector2(50, 11.57)
-gravity = Vector2(0, 100)
-initial_velocity_max = 1.25
-angle_min = -720.0
-angle_max = 720.0
-scale_amount_min = 0.0
-scale_amount_max = 0.07
-scale_amount_curve = SubResource("Curve_myk0c")
-color_ramp = SubResource("Gradient_0l41h")

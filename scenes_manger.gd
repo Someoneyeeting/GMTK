@@ -1,6 +1,11 @@
 extends Node2D
 
 
+var win = false
+
+func _win():
+	win = true
+
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("restart")):
 		$AnimationPlayer.play("restart")

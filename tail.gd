@@ -27,5 +27,7 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("cut")):
 		cut.emit(ind)
-	if(area.is_in_group("win") and ishead):
-		win.emit()
+	if(area.is_in_group("win")):
+		if(ishead):
+			win.emit()
+		hide()

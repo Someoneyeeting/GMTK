@@ -1,7 +1,24 @@
-[gd_scene load_steps=6 format=3 uid="uid://c5nemep3wajjk"]
+[gd_scene load_steps=8 format=3 uid="uid://c5nemep3wajjk"]
 
 [ext_resource type="Script" path="res://scenes_manger.gd" id="1_wqy7e"]
 [ext_resource type="Texture2D" uid="uid://ecwjk0y4urr0" path="res://assets/headsegment.png" id="2_oqs38"]
+[ext_resource type="AudioStream" uid="uid://dmjocxp58hqte" path="res://assets/music/Jeff 1.mp3" id="3_yemuk"]
+[ext_resource type="AudioStream" uid="uid://btrlm3qu1is8u" path="res://assets/music/651270__ampi_sound__water_stream_vanhankaupunginkoski_1.wav" id="4_u8h4n"]
+
+[sub_resource type="Animation" id="Animation_eb1nl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Untitled36820240818064141:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-671, 342)]
+}
 
 [sub_resource type="Animation" id="Animation_7xr16"]
 resource_name = "restart"
@@ -33,21 +50,6 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_eb1nl"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Untitled36820240818064141:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-671, 342)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lnoqp"]
 _data = {
 "RESET": SubResource("Animation_eb1nl"),
@@ -59,6 +61,7 @@ z_index = 2445
 script = ExtResource("1_wqy7e")
 
 [node name="Untitled36820240818064141" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
 position = Vector2(-671, 342)
 scale = Vector2(9.8725, 9.1125)
 texture = ExtResource("2_oqs38")
@@ -67,3 +70,13 @@ texture = ExtResource("2_oqs38")
 libraries = {
 "": SubResource("AnimationLibrary_lnoqp")
 }
+
+[node name="music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_yemuk")
+volume_db = -20.88
+autoplay = true
+
+[node name="ambient" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_u8h4n")
+volume_db = -25.0
+autoplay = true

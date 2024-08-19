@@ -54,8 +54,5 @@ wait_time = 0.15
 wait_time = 0.1
 one_shot = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
-
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="win" to="." method="_on_win_timeout"]

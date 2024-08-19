@@ -43,7 +43,7 @@ func move():
 	$cool.start()
 
 func _physics_process(delta: float) -> void:
-	if(isdead):
+	if(isdead or body.is_empty()):
 		for i in body:
 			i.isdead = true
 		return

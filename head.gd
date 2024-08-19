@@ -16,6 +16,7 @@ var plannedmoves = []
 var target : Vector2
 var toadd = 0
 var win = false
+var winvel = 0
 
 func add_tail(tail = null,ext = false):
 	if(not tail):
@@ -35,6 +36,7 @@ func add_tail(tail = null,ext = false):
 func _win():
 	if(not win):
 		$win.start(0.6)
+		ScenesManger._win()
 	win = true
 
 func get_body_poses():
@@ -46,7 +48,6 @@ func get_body_poses():
 func _ready() -> void:
 	add_tail($tail)
 	$rayspos.reparent(cols[0])
-	$Camera2D.top_level = true
 
 func extend():
 	#var t = add_tail(null,true)
@@ -57,14 +58,14 @@ func extend():
 	
 
 func cut(ind,delseg = true):
-	if(ind == 0 or ind >= cols.size()):
-		return
-	length = ind
+	#if(ind == 0 or ind >= cols.size()):
+		#return
+	length = min(ind,length)
 	if(delseg):
 		cols[ind].queue_free.call_deferred()
 		$BodyAnimation.body[ind].queue_free.call_deferred()
 	var body = BODY.instantiate()
-	for i in range(ind + (1 if delseg else 0),cols.size()):
+	for i in range(ind + (1 if delseg else 0),length):
 		cols[i].reparent.call_deferred(body)
 		$BodyAnimation.body[i].snapobj = cols[i]
 		body.get_node("body").add_body(cols[i].position,$BodyAnimation.body[i])
@@ -72,7 +73,8 @@ func cut(ind,delseg = true):
 		cols[i].cut.disconnect(cut)
 	while($BodyAnimation.body.size() > length):
 		$BodyAnimation.body.pop_back()
-	$BodyAnimation.body[-1].prevseg = null
+	if(not $BodyAnimation.body.is_empty()):
+		$BodyAnimation.body[-1].prevseg = null
 	get_parent().add_child.call_deferred(body)
 
 func move(dir):
@@ -137,7 +139,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _physics_process(delta: float) -> void:
-	$Node2D.position = cols[0].position
 	#if($cooldown.is_stopped()):
 		#$Camera2D.position = lerp($Camera2D.position,Vector2.ZERO,0.25)
 	#else:
@@ -156,7 +157,10 @@ func _physics_process(delta: float) -> void:
 		if(velocity.y >= 0):
 			move_and_slide()
 	else:
-		move_and_slide()
+		pass
+		#position.x += winvel
+		#if($win.is_stopped()):
+			#winvel += delta * 30
 	
 	while(cols.size() > length):
 		cols.pop_back()
@@ -165,6 +169,11 @@ func _physics_process(delta: float) -> void:
 		if(not poses.is_empty()):
 			tail.position -= poses[-1]
 		#move(lastdir)
+	
+	if(cols.is_empty()):
+		return
+		
+	$Node2D.position = cols[0].position
 	
 	for i in cols.size():
 		cols[i].ishead = false
@@ -193,5 +202,5 @@ func _on_cooldown_timeout() -> void:
 func _on_win_timeout() -> void:
 	win = true
 	velocity = Vector2(0,-00)
-	move(Vector2(0,-40))
+	move(Vector2(40,0))
 	$win.start(0.03)

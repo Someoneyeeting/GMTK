@@ -70,18 +70,19 @@ func _physics_process(delta: float) -> void:
 		$tail.show()
 	else:
 		#$Arrow.show()
-		var localprev :Vector2 = (prevseg.movetarget - movetarget).normalized()
-		var localnext :Vector2 = (nextseg.movetarget - movetarget).normalized()
-		var cross = localprev.cross(localnext)
-		if(cross == 0):
-			#$Arrow.show()
-			$curve.hide()
-			$body.show()
-		else:
-			$curve.show()
-			#$Arrow.hide()
-			$curve.flip_h = cross < 0
-	#print($move.time_left, $move.wait_time)
+		if(is_instance_valid(nextseg) and is_instance_valid(prevseg)):
+			var localprev :Vector2 = (prevseg.movetarget - movetarget).normalized()
+			var localnext :Vector2 = (nextseg.movetarget - movetarget).normalized()
+			var cross = localprev.cross(localnext)
+			if(cross == 0):
+				#$Arrow.show()
+				$curve.hide()
+				$body.show()
+			else:
+				$curve.show()
+				#$Arrow.hide()
+				$curve.flip_h = cross < 0
+		#print($move.time_left, $move.wait_time)
 	if(not $move.is_stopped()):
 		position = lerp(currentpos,movetarget,1 - easeing((float($move.time_left) / $move.wait_time)))
 	else:

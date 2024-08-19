@@ -1,13 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvvlp1s3e87dj"]
+[gd_scene load_steps=7 format=3 uid="uid://bvvlp1s3e87dj"]
 
 [ext_resource type="PackedScene" uid="uid://dsvou0ox4eyl2" path="res://longer.tscn" id="1_au0nh"]
 [ext_resource type="PackedScene" uid="uid://88fwtr1j7jgo" path="res://spike.tscn" id="2_tkfe7"]
 [ext_resource type="PackedScene" uid="uid://bust5d8di5f06" path="res://win.tscn" id="3_rri4j"]
+[ext_resource type="PackedScene" uid="uid://djakrh6bipbn0" path="res://bramble.tscn" id="4_xb5qm"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_o0aag"]
 scenes/1/scene = ExtResource("1_au0nh")
 scenes/2/scene = ExtResource("2_tkfe7")
 scenes/3/scene = ExtResource("3_rri4j")
+scenes/4/scene = ExtResource("4_xb5qm")
 
 [sub_resource type="TileSet" id="TileSet_c4i4c"]
 tile_size = Vector2i(40, 40)

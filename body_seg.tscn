@@ -21,7 +21,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 
 [node name="move" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="head" type="Sprite2D" parent="."]

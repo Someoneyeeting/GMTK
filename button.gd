@@ -2,6 +2,7 @@ extends Node2D
 
 
 @export var target : Node2D
+@export var invert := false
 var pressed = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -10,6 +11,9 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 			press()
 			pressed = true
 
+func _ready() -> void:
+	if(invert):
+		target.activate()
 
 func _physics_process(delta: float) -> void:
 	var flag = false
@@ -20,7 +24,10 @@ func _physics_process(delta: float) -> void:
 			break
 	if(not flag):
 		if(pressed):
-			target.deactivate()
+			if(not invert):
+				target.deactivate()
+			else:
+				target.activate()
 		pressed = false
 	
 	$ColorRect.visible = not pressed
@@ -28,5 +35,8 @@ func _physics_process(delta: float) -> void:
 		
 
 func press():
-	target.activate()
+	if(not invert):
+		target.activate()
+	else:
+		target.deactivate()
 	
