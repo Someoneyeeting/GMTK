@@ -66,7 +66,7 @@ position = Vector2(301, 317)
 
 [node name="head" parent="." instance=ExtResource("4_vtl2i")]
 position = Vector2(20, 140)
-length = 40
+length = 100
 
 [node name="backgrounds" parent="." instance=ExtResource("1_30dj6")]
 
