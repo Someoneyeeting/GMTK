@@ -81,6 +81,7 @@ func _on_eaten_area_entered(area: Area2D) -> void:
 			area.get_parent().extend.emit()
 		var part = PART.instantiate()
 		get_parent().add_child(part)
+		$Sprite.top_level = false
 		part.global_position = global_position + Vector2(0,20)
 		$Sprite.global_position = global_position
 		$AnimationPlayer.play("Die")

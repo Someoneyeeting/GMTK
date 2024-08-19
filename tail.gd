@@ -4,6 +4,7 @@ extends CollisionShape2D
 
 signal cut(ind,delseg)
 signal extend
+signal win
 
 var ind = -1
 
@@ -26,9 +27,5 @@ func _physics_process(delta: float) -> void:
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("cut")):
 		cut.emit(ind)
-	return
-	if(area.is_in_group("expand")):
-		if(ishead):
-			extend.emit()
-		else:
-			print("squish")
+	if(area.is_in_group("win") and ishead):
+		win.emit()
