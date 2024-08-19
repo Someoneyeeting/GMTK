@@ -5,6 +5,8 @@ extends CharacterBody2D
 
 var grid_scale = Vector2(40,40)
 
+
+@export var inf = false
 const TAIL = preload("res://tail.tscn")
 const BODY = preload("res://deadbody.tscn")
 var cols := []
@@ -48,6 +50,7 @@ func get_body_poses():
 func _ready() -> void:
 	add_tail($tail)
 	$rayspos.reparent(cols[0])
+	#move(Vector2(40,0))
 
 func extend():
 	#var t = add_tail(null,true)
@@ -164,7 +167,8 @@ func _physics_process(delta: float) -> void:
 	
 	while(cols.size() > length):
 		cols.pop_back()
-	while(cols.size() < length):
+	while(cols.size() < length or (inf and poses.size() >= cols.size() - 2 and not win)):
+		length = max(length,cols.size() + 1)
 		var tail = add_tail()
 		if(not poses.is_empty()):
 			tail.position -= poses[-1]
@@ -204,3 +208,7 @@ func _on_win_timeout() -> void:
 	velocity = Vector2(0,-00)
 	move(Vector2(40,0))
 	$win.start(0.03)
+
+
+func _on_spawn_timeout() -> void:
+	move(Vector2(40,0))

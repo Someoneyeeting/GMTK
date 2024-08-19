@@ -54,5 +54,11 @@ wait_time = 0.15
 wait_time = 0.1
 one_shot = true
 
+[node name="spawn" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+autostart = true
+
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="win" to="." method="_on_win_timeout"]
+[connection signal="timeout" from="spawn" to="." method="_on_spawn_timeout"]
