@@ -11,8 +11,9 @@ void vertex() {
 }
 
 void fragment() {
-	float off = texture(noise,vec2(UV.x,UV.y + TIME / 30.0)).r;
-	vec4 clr = texture(TEXTURE,UV + vec2(0.0,-TIME * 0.8 + off));
+	float off = texture(noise,vec2(SCREEN_UV.x,SCREEN_UV.y + TIME / 30.0)).r;
+	float offx = texture(noise,vec2(SCREEN_UV.x * 10.0,SCREEN_UV.y + TIME / 10.0)).r;
+	vec4 clr = texture(TEXTURE,UV + vec2(sin(off + SCREEN_UV.y) / 100.0,-TIME * 3.0 + off));
 	clr.a *= 0.3;
 	COLOR = clr;
 }

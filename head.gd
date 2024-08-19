@@ -141,7 +141,7 @@ func _physics_process(delta: float) -> void:
 	if($cooldown.is_stopped()):
 		$Camera2D.position = lerp($Camera2D.position,Vector2.ZERO,0.25)
 	else:
-		$Camera2D.position = lerp($Camera2D.position,-lastdir / 10.0,0.25)
+		$Camera2D.position = lerp($Camera2D.position,-lastdir / 20.0,0.25)
 		
 	#target = Vector2.ZERO
 	#for i in [%left,%right,%down,%up]:
