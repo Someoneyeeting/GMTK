@@ -6,6 +6,7 @@
 size = Vector2(16, 16)
 
 [node name="win" type="Node2D"]
+z_index = 235
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -20.0

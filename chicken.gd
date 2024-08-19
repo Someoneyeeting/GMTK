@@ -10,6 +10,7 @@ var currentpos
 var movetarget
 var mult :float= 0
 var yoff :float= 0
+@export var moves := true
 
 const PART = preload("res://feathers.tscn")
 
@@ -27,6 +28,8 @@ func _ready() -> void:
 	$Sprite.global_position = global_position
 
 func move():
+	if(not moves):
+		return
 	if($AnimationPlayer.is_playing()):
 		return
 	currentpos = movetarget
@@ -43,7 +46,11 @@ func _physics_process(delta: float) -> void:
 	
 	#$CollisionShape2D.position.x = 40 * dir
 	$Sprite.global_position.x = lerp(currentpos,movetarget,1 - easeing(Manger.timer.time_left / Manger.timer.wait_time))
-	$Sprite.global_position.y = lerp($Sprite.global_position.y - 3.75 * 0.222 + yoff,global_position.y - 3.75 * 0.222,0.4)
+	if(moves):
+		$Sprite.global_position.y = lerp($Sprite.global_position.y - 3.75 * 0.222 + yoff,global_position.y - 3.75 * 0.222,0.4)
+	else:
+		$Sprite.global_position.y = lerp($Sprite.global_position.y - 3.75 * 0.222,global_position.y - 3.75 * 0.222,0.4)
+		
 	#if(is_on_wall()):
 		#movetarget = currentpos
 		#velocity.x = 0
@@ -59,10 +66,15 @@ func _physics_process(delta: float) -> void:
 		currentpos = movetarget
 		#position.x = floor(position.x / 1280.0 * 40) / 40.0 * 1280
 		mult = lerp(mult,0.0,0.4)
-		$Sprite.stop()
-	else:
-		$Sprite.play("default")
 		#mult = lerp(mult,2.0,0.1)
+	
+	if(moves):
+		if(Manger.timer.is_stopped()):
+			$Sprite.frame = 0
+		else:
+			$Sprite.frame = 1
+	else:
+		$Sprite.frame = 2
 	
 	#$ColorRect.rotation_degrees = 10 * sin(t) * mult
 	velocity.x = 0
