@@ -5,7 +5,6 @@ signal move
 
 @export var timer : Timer
 
-
 func _ready() -> void:
 	move.connect(_move)
 	

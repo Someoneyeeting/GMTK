@@ -3,6 +3,8 @@ extends Node2D
 
 var win = false
 
+@onready var music := $music
+
 func _win():
 	win = true
 

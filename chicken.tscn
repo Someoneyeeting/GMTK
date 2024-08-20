@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://c74k00wdcpco0"]
+[gd_scene load_steps=13 format=3 uid="uid://c74k00wdcpco0"]
 
 [ext_resource type="Script" path="res://chicken.gd" id="1_7f3wq"]
 [ext_resource type="Texture2D" uid="uid://blp2phco0anl6" path="res://assets/chuck/ChickenRightWalk01.png" id="2_0s2c6"]
 [ext_resource type="Texture2D" uid="uid://bwwknvmk4d06c" path="res://assets/chuck/ChickenRightWalk02.png" id="3_1pcya"]
 [ext_resource type="Texture2D" uid="uid://bhvyh6cveegm2" path="res://assets/chuck/ChickenSleep.png" id="4_elw3y"]
+[ext_resource type="AudioStream" uid="uid://eqdkc45e1csx" path="res://assets/soundeffects/chicken.wav" id="5_c1jjt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7wcol"]
 size = Vector2(40, 40)
@@ -41,23 +42,26 @@ tracks/0/path = NodePath("Sprite:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.0333333, 0.333333),
+"times": PackedFloat32Array(0.0333333, 0.233333),
 "transitions": PackedFloat32Array(0.176777, 1),
 "update": 0,
 "values": [Vector2(0.222, 0.2), Vector2(0.222, 0)]
 }
-tracks/1/type = "value"
+tracks/1/type = "audio"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
+tracks/1/path = NodePath("AudioStreamPlayer")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.0333333, 0.233333),
-"transitions": PackedFloat32Array(0.176777, 1),
-"update": 0,
-"values": [Vector2(0, -4.76837e-07), Vector2(0, 15)]
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("5_c1jjt")
+}],
+"times": PackedFloat32Array(0)
 }
+tracks/1/use_blend = true
 
 [sub_resource type="Animation" id="Animation_200jg"]
 length = 0.001
@@ -72,18 +76,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0.222346, 0.222346)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, -3.75)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7iulw"]
@@ -102,7 +94,7 @@ script = ExtResource("1_7f3wq")
 shape = SubResource("RectangleShape2D_7wcol")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -3.75)
+position = Vector2(0, -4.76837e-07)
 scale = Vector2(0.222346, 0.222346)
 sprite_frames = SubResource("SpriteFrames_am586")
 
@@ -130,6 +122,9 @@ libraries = {
 "": SubResource("AnimationLibrary_7iulw")
 }
 speed_scale = 0.3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -15.0
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="eaten" to="." method="_on_eaten_area_entered"]

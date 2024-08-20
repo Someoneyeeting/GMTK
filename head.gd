@@ -19,6 +19,7 @@ var target : Vector2
 var toadd = 0
 var win = false
 var winvel = 0
+var isfloor = true
 
 func add_tail(tail = null,ext = false):
 	if(not tail):
@@ -51,6 +52,9 @@ func _ready() -> void:
 	add_tail($tail)
 	$rayspos.reparent(cols[0])
 	#move(Vector2(40,0))
+
+func get_head_pos():
+	return cols[0].global_position
 
 func extend():
 	#var t = add_tail(null,true)
@@ -110,7 +114,10 @@ func move(dir):
 		cols[i].position += poses[i]
 	lastdir = dir
 	if(not win):
-		Manger.move.emit()
+		if($spawn.is_stopped()):
+			$move.pitch_scale = randf_range(0.8,1)
+			$move.play()
+			Manger.move.emit()
 		$BodyAnimation.move()
 
 func _input(event: InputEvent) -> void:
@@ -159,6 +166,8 @@ func _physics_process(delta: float) -> void:
 		velocity.y += .5 / delta
 		if(velocity.y >= 0):
 			move_and_slide()
+		if(not isfloor and is_on_floor() and $spawn.is_stopped()):
+			$land.play()
 	else:
 		pass
 		#position.x += winvel
@@ -193,6 +202,7 @@ func _physics_process(delta: float) -> void:
 	cols[-1].isend = true
 	frameedit = false
 	$BodyAnimation.init = false
+	isfloor = is_on_floor()
 	#print($CharacterBody2D.is_on_floor())
 
 

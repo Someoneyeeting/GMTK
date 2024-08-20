@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxl2ccdf31g4r"]
+[gd_scene load_steps=6 format=3 uid="uid://bxl2ccdf31g4r"]
 
 [ext_resource type="Script" path="res://head.gd" id="1_qru2w"]
 [ext_resource type="PackedScene" uid="uid://dkydwjjfqggw2" path="res://tail.tscn" id="2_2qmoa"]
 [ext_resource type="PackedScene" uid="uid://ds17nl3p5my8v" path="res://body_animation.tscn" id="2_in4nm"]
+[ext_resource type="AudioStream" uid="uid://dio754k8ixn1f" path="res://assets/soundeffects/move.wav" id="4_erqvp"]
+[ext_resource type="AudioStream" uid="uid://xvs1a5oq75fq" path="res://assets/soundeffects/grass.wav" id="5_m2b88"]
 
 [node name="head" type="CharacterBody2D" groups=["press", "squish"]]
 collision_layer = 3
@@ -58,6 +60,15 @@ one_shot = true
 wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="move" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_erqvp")
+volume_db = -28.205
+pitch_scale = 0.9
+
+[node name="land" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_m2b88")
+volume_db = -27.0
 
 [connection signal="timeout" from="cooldown" to="." method="_on_cooldown_timeout"]
 [connection signal="timeout" from="win" to="." method="_on_win_timeout"]

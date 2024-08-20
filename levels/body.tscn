@@ -1,0 +1,104 @@
+[gd_scene load_steps=7 format=3 uid="uid://q8v6usd1wdl"]
+
+[ext_resource type="Texture2D" uid="uid://i2s2pf3f7hkr" path="res://assets/jeff/wing.png" id="1_kmkdd"]
+
+[sub_resource type="GDScript" id="GDScript_0ss73"]
+script/source = "@tool
+extends Node2D
+
+
+var sprites = []
+
+func _ready() -> void:
+	for i in 18:
+		var sp = Sprite2D.new()
+		sp.texture = load(\"res://assets/bodysegment.png\")
+		add_child(sp)
+		sprites.append(sp)
+		sp.scale *= 0.3
+	
+	sprites[0].texture = load(\"res://assets/tailsegment.png\")
+	sprites[-1].texture = load(\"res://assets/headsegment.png\")
+	
+		
+
+func _physics_process(delta: float) -> void:
+	for i in sprites.size():
+		var curve = ($Path2D.curve as Curve2D).sample_baked_with_rotation(float(i) / sprites.size() * $Path2D.curve.get_baked_length())
+		sprites[i].position = curve.origin
+		sprites[i].rotation = curve.get_rotation()
+		if(i == sprites.size() - 5):
+			$Sprite2D.position = curve.origin + Vector2(0,-4)
+			$Sprite2D.rotation = curve.get_rotation() + 0.3
+"
+
+[sub_resource type="Curve2D" id="Curve2D_cn0pw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -39, 410, -97.6844, 3.11441, 97.6844, -3.11441, 54, -21, 0, 0, 0, 0, 150, 110)
+}
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_qcku2"]
+resource_name = "swing"
+length = 0.276
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667),
+"transitions": PackedFloat32Array(-4.43828, -4.43828, 4.92458),
+"update": 0,
+"values": [Vector2(0.175, 0.175), Vector2(0.175, -0.175), Vector2(0.175, 0.175)]
+}
+
+[sub_resource type="Animation" id="Animation_7w6b6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.175, 0.175)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mjryc"]
+_data = {
+"RESET": SubResource("Animation_7w6b6"),
+"swing": SubResource("Animation_qcku2")
+}
+
+[node name="Node2D" type="Node2D"]
+script = SubResource("GDScript_0ss73")
+
+[node name="Path2D" type="Path2D" parent="."]
+position = Vector2(-11, 3)
+curve = SubResource("Curve2D_cn0pw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
+position = Vector2(58.4736, -25.0462)
+rotation = 0.31139
+scale = Vector2(0.175, 0.175)
+texture = ExtResource("1_kmkdd")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+z_index = -1
+z_as_relative = false
+position = Vector2(8.98048, -33.3416)
+texture = ExtResource("1_kmkdd")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mjryc")
+}
+autoplay = "swing"
+speed_scale = 2.0

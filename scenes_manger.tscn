@@ -10,7 +10,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Untitled36820240818064141:position")
+tracks/0/path = NodePath("CanvasLayer/Untitled36820240818064141:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -26,7 +26,7 @@ length = 1.7
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Untitled36820240818064141:position")
+tracks/0/path = NodePath("CanvasLayer/Untitled36820240818064141:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -60,12 +60,6 @@ _data = {
 z_index = 2445
 script = ExtResource("1_wqy7e")
 
-[node name="Untitled36820240818064141" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 1)
-position = Vector2(-671, 342)
-scale = Vector2(9.8725, 9.1125)
-texture = ExtResource("2_oqs38")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_lnoqp")
@@ -80,3 +74,11 @@ autoplay = true
 stream = ExtResource("4_u8h4n")
 volume_db = -25.0
 autoplay = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Untitled36820240818064141" type="Sprite2D" parent="CanvasLayer"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(-671, 342)
+scale = Vector2(9.8725, 9.1125)
+texture = ExtResource("2_oqs38")

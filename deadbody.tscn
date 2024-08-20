@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://x7fcq7gtpunw" path="res://fall.tscn" id="1_da01p"]
 [ext_resource type="PackedScene" uid="uid://ds17nl3p5my8v" path="res://body_animation.tscn" id="2_id2an"]
 
-[node name="deadbody" type="CharacterBody2D" groups=["body"]]
+[node name="deadbody" type="CharacterBody2D" groups=["body", "press"]]
 
 [node name="fall" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_da01p")]
 target = NodePath("..")
