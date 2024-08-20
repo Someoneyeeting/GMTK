@@ -4,6 +4,8 @@ extends Node2D
 var win = false
 var curlvl := -1
 var levels = [
+	"res://levels/level_1.tscn",
+	"res://levels/level_2.tscn",
 	"res://levels/test.tscn",
 	"res://levels/mindfield.tscn",
 	"res://levels/finale.tscn"

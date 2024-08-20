@@ -77,4 +77,4 @@ click={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-environment/defaults/default_clear_color=Color(0.145098, 0.427451, 0.486275, 1)
+environment/defaults/default_clear_color=Color(0.145098, 0.199067, 0.486275, 1)

@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://tilemaps/ground.tscn" id="2_ggqe5"]
 [ext_resource type="PackedScene" uid="uid://bvvlp1s3e87dj" path="res://tilemaps/scenes.tscn" id="3_1114w"]
 [ext_resource type="PackedScene" uid="uid://ces54b8befns" path="res://button.tscn" id="4_fxk4j"]
-[ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://head.tscn" id="4_vtl2i"]
+[ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://assets/head.tscn" id="4_vtl2i"]
 [ext_resource type="PackedScene" uid="uid://dp0l7ck638dt8" path="res://gate.tscn" id="5_sx3lt"]
 [ext_resource type="Texture2D" uid="uid://cqpoqj5rglxyf" path="res://assets/fullrockb.png" id="7_di0rx"]
 [ext_resource type="Texture2D" uid="uid://dme3xd7js5gq3" path="res://assets/fullrocka.png" id="8_scegj"]
