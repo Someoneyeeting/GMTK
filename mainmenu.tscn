@@ -1,28 +1,41 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqpwsek5kc0lv"]
+[gd_scene load_steps=21 format=3 uid="uid://cqpwsek5kc0lv"]
 
 [ext_resource type="PackedScene" uid="uid://0eob1v8xpjxi" path="res://background.tscn" id="1_4w514"]
 [ext_resource type="FontFile" uid="uid://bjokimfv4db2e" path="res://arapey-regular.ttf" id="2_mmaq6"]
 [ext_resource type="PackedScene" uid="uid://dlee7qqkhtk3v" path="res://clouds.tscn" id="3_8kcxu"]
-[ext_resource type="Texture2D" uid="uid://d22d4g1jndvtq" path="res://assets/mainmenu/jeff.png" id="4_rhcm6"]
+[ext_resource type="Texture2D" uid="uid://biy4wgwlpivti" path="res://assets/mainmenu/Untitled405_20240820051935.png" id="4_51ntj"]
 [ext_resource type="Texture2D" uid="uid://d1twg0xe1v3q8" path="res://assets/mainmenu/Untitled395_20240819073949.png" id="5_kn2nb"]
 [ext_resource type="Texture2D" uid="uid://kpdssbhr0v0" path="res://assets/mainmenu/Untitled410_20240819201640.png" id="6_w25bd"]
+[ext_resource type="Texture2D" uid="uid://dil51bppgqrym" path="res://assets/mainmenu/Game Maker's Toolkit - The GMTK Game Jam 2024 theme is... [iIbTPpfvZBQ - 916x515 - 1m16s].png" id="7_s8sg0"]
+[ext_resource type="Texture2D" uid="uid://dmfopxly7cs7g" path="res://assets/mainmenu/Untitled405_20240820051732.png" id="8_uis32"]
+[ext_resource type="Texture2D" uid="uid://dmj4pnwxp8biu" path="res://assets/mainmenu/arrow.png" id="9_d82qg"]
 
 [sub_resource type="GDScript" id="GDScript_747gg"]
 script/source = "extends Node2D
 
 
 func _ready() -> void:
-	if(\"web\" in OS.get_name().to_lower() or true):
+	if(\"web\" in OS.get_name().to_lower()):
 		$notice/Button.disabled = false
 		$AnimationPlayer.play(\"notice_in\")
+	else:
+		await get_tree().create_timer(2).timeout
+		$AnimationPlayer.play(\"menu_in\")
 		
 		
-
+func _input(event: InputEvent) -> void:
+	if(event.is_action_released(\"click\")):
+		if($notice/Button.get_global_rect().has_point(get_global_mouse_position()) and not $notice/Button.disabled):
+			_on_button_pressed()
+		elif($menu/TextureButton.get_global_rect().has_point(get_global_mouse_position())):
+			$AnimationPlayer.play(\"fadeout\")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if(anim_name == \"noitce_out\"):
+	if(anim_name == \"notice_out\"):
 		$AnimationPlayer.play(\"menu_in\")
-
+	if(anim_name == \"fadeout\"):
+		get_tree().call_deferred(\"change_scene_to_file\",\"res://story.tscn\")
+		
 
 func _on_button_pressed() -> void:
 	print(\"press\")
@@ -50,6 +63,28 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5equs"]
 shader = SubResource("Shader_ikbg8")
+
+[sub_resource type="Shader" id="Shader_fcrru"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(COLOR.a != 1.){
+		COLOR.a = 0.0;
+	}
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjjup"]
+shader = SubResource("Shader_fcrru")
 
 [sub_resource type="Animation" id="Animation_uxhc2"]
 resource_name = "notice_in"
@@ -129,6 +164,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ColorRect:color")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_8gw2g"]
 resource_name = "notice_out"
@@ -186,9 +233,25 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_kbtba"]
+resource_name = "fadeout"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.0333333, 1),
+"transitions": PackedFloat32Array(0.378929, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqbtv"]
 _data = {
 "RESET": SubResource("Animation_wi8ir"),
+"fadeout": SubResource("Animation_kbtba"),
 "menu_in": SubResource("Animation_6hvvn"),
 "notice_in": SubResource("Animation_uxhc2"),
 "notice_out": SubResource("Animation_8gw2g")
@@ -271,9 +334,9 @@ scale = Vector2(1.81549, 3.94558)
 [node name="menu" type="Node2D" parent="."]
 position = Vector2(0, 720)
 
-[node name="Jeff" type="Sprite2D" parent="menu"]
-scale = Vector2(2.00481, 2.00481)
-texture = ExtResource("4_rhcm6")
+[node name="Untitled40520240820051935" type="Sprite2D" parent="menu"]
+scale = Vector2(2, 2)
+texture = ExtResource("4_51ntj")
 centered = false
 
 [node name="Untitled39520240819073949" type="Sprite2D" parent="menu"]
@@ -290,10 +353,35 @@ offset_bottom = 451.0
 texture_normal = ExtResource("6_w25bd")
 stretch_mode = 5
 
+[node name="GameMaker\'sToolkit-TheGmtkGameJam2024ThemeIs___[iIbTPpfvZbq-916x515-1m16s]" type="Sprite2D" parent="menu"]
+scale = Vector2(2, 2)
+texture = ExtResource("7_s8sg0")
+centered = false
+
+[node name="Untitled40520240820051732" type="Sprite2D" parent="menu"]
+material = SubResource("ShaderMaterial_vjjup")
+position = Vector2(924, 514)
+scale = Vector2(2, 2)
+texture = ExtResource("8_uis32")
+region_enabled = true
+region_rect = Rect2(328, 176, 264, 160)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yqbtv")
 }
+speed_scale = 0.7
 
-[connection signal="pressed" from="notice/Button" to="." method="_on_button_pressed"]
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.611765)
+scale = Vector2(2, 2)
+texture = ExtResource("9_d82qg")
+centered = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 100
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0, 0, 0, 0)
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -9,6 +9,8 @@ var levels = [
 	"res://levels/finale.tscn"
 ]
 
+var story = false
+
 @onready var music := $music
 
 func _ready() -> void:
@@ -27,6 +29,11 @@ func switch_to(level):
 
 func _physics_process(delta: float) -> void:
 	$CanvasLayer/Label.text = str(curlvl + 1) + "/" + str(levels.size())
+	if(story):
+		$ambient.volume_db -= 0.1
+	else:
+		$ambient.volume_db += 0.1
+	$ambient.volume_db = max(min(-20.88,$ambient.volume_db),-200)
 
 func _next():
 	curlvl += 1

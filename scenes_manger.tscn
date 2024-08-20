@@ -163,7 +163,6 @@ libraries = {
 [node name="music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_yemuk")
 volume_db = -20.88
-autoplay = true
 
 [node name="ambient" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_u8h4n")
