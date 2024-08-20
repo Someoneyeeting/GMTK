@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://assets/head.tscn" id="1_knfye"]
 [ext_resource type="Texture2D" uid="uid://c6mu24rlalwre" path="res://assets/ground/GroundDirt.png" id="2_h13uw"]
-[ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://tilemaps/ground.tscn" id="2_kbxlu"]
+[ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://assets/ground/ground.tscn" id="2_kbxlu"]
 [ext_resource type="PackedScene" uid="uid://bvvlp1s3e87dj" path="res://tilemaps/scenes.tscn" id="3_na3bw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_tp16f"]
