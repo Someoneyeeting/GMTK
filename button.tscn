@@ -1,6 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://ces54b8befns"]
+[gd_scene load_steps=6 format=3 uid="uid://ces54b8befns"]
 
 [ext_resource type="Script" path="res://button.gd" id="1_ssvqx"]
+[ext_resource type="Texture2D" uid="uid://lmqtvg44r4dt" path="res://assets/button/Game Maker's Toolkit - The GMTK Game Jam 2024 theme is... [iIbTPpfvZBQ - 916x515 - 1m16s].png" id="2_c0hse"]
+[ext_resource type="Texture2D" uid="uid://bgmldhjpebjvw" path="res://assets/button/Untitled391_20240818164533.png" id="3_5qy0b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q26kt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_c0hse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_5qy0b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5uoi1"]
 size = Vector2(30, 19)
@@ -8,7 +24,13 @@ size = Vector2(30, 19)
 [node name="button" type="Node2D"]
 script = ExtResource("1_ssvqx")
 
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 11)
+scale = Vector2(0.374608, 0.374608)
+sprite_frames = SubResource("SpriteFrames_q26kt")
+
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -15.0
 offset_top = 2.0
 offset_right = 15.0

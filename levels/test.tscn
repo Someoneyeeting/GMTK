@@ -58,6 +58,7 @@ scale = Vector2(1, 1.065)
 [node name="button" parent="Node2D" node_paths=PackedStringArray("target") instance=ExtResource("5_qcqcb")]
 position = Vector2(1181, 98)
 target = NodePath("../gate")
+color = Color(0.400539, 0.534489, 0.676505, 1)
 
 [node name="head" parent="." instance=ExtResource("3_3i20d")]
 position = Vector2(20, 420)

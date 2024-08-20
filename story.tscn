@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://glav5a1aeexv"]
+[gd_scene load_steps=8 format=3 uid="uid://glav5a1aeexv"]
 
 [ext_resource type="Texture2D" uid="uid://ch13wjip1hlw7" path="res://assets/story/arrow.png" id="1_v1hoi"]
 [ext_resource type="Texture2D" uid="uid://cmgbku8dhb5gg" path="res://assets/story/Intro02.png" id="2_v45fq"]
+[ext_resource type="Texture2D" uid="uid://bih6d65mu0bpl" path="res://assets/story/Intro03.png" id="3_v3fjk"]
 
 [sub_resource type="GDScript" id="GDScript_g8png"]
 script/source = "extends Node2D
@@ -9,7 +10,8 @@ script/source = "extends Node2D
 
 @onready var pages = [
 	$pages/Sprite2D2,
-	$pages/Sprite2D3
+	$pages/Sprite2D3,
+	$pages/Sprite2D4
 ]
 
 var cur = 0
@@ -38,6 +40,21 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 		$Timer.start()
 "
 
+[sub_resource type="Animation" id="Animation_fbivr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_tanw4"]
 resource_name = "fadein"
 length = 2.0
@@ -52,21 +69,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(0.34151, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_fbivr"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_onee7"]
@@ -97,6 +99,9 @@ centered = false
 
 [node name="Sprite2D4" type="Sprite2D" parent="pages"]
 modulate = Color(1, 1, 1, 0)
+scale = Vector2(2, 2)
+texture = ExtResource("3_v3fjk")
+centered = false
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.5

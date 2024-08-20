@@ -3,6 +3,7 @@ extends Node2D
 
 @export var target : Node2D
 @export var invert := false
+@export var color := Color.WHITE
 var pressed = false
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -14,6 +15,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _ready() -> void:
 	if(invert):
 		target.activate()
+	modulate = color
+	target.modulate = color
 
 func _physics_process(delta: float) -> void:
 	var flag = false
@@ -30,7 +33,7 @@ func _physics_process(delta: float) -> void:
 				target.activate()
 		pressed = false
 	
-	$ColorRect.visible = not pressed
+	$Sprite.frame = 1 if pressed else 0
 		
 		
 

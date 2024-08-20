@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c3gribds53xao"]
+[gd_scene load_steps=29 format=4 uid="uid://c3gribds53xao"]
 
 [ext_resource type="PackedScene" uid="uid://bh8jf4ley7tw5" path="res://tilemaps/ground.tscn" id="1_4u2iw"]
 [ext_resource type="PackedScene" uid="uid://bxl2ccdf31g4r" path="res://head.tscn" id="2_n5jds"]
@@ -7,8 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://d102a13un08om" path="res://assets/finalebackground/fullrocka.png" id="5_ae04b"]
 [ext_resource type="Texture2D" uid="uid://c0x4u7vfw8bwh" path="res://assets/finalebackground/Untitled401_20240819114122.png" id="6_5uqa2"]
 [ext_resource type="PackedScene" uid="uid://q8v6usd1wdl" path="res://levels/body.tscn" id="7_4qptk"]
+[ext_resource type="AudioStream" uid="uid://di68m6bq2ts56" path="res://assets/soundeffects/click-1.mp3" id="7_yd4o7"]
 [ext_resource type="AudioStream" uid="uid://j5rrm0kqpavf" path="res://assets/soundeffects/Mosquito Flying Buzz Sound Effect.mp3" id="8_5wv0f"]
 [ext_resource type="Texture2D" uid="uid://btbphfekm0ce" path="res://assets/mainmenu/win.png" id="9_6qc6n"]
+[ext_resource type="FontFile" uid="uid://dfdtqm8ngl0yc" path="res://BLKCHCRY.TTF" id="11_xcspn"]
+[ext_resource type="Texture2D" uid="uid://bpqoicgujeaiw" path="res://assets/story/back.png" id="12_db03u"]
+[ext_resource type="FontFile" uid="uid://bjokimfv4db2e" path="res://arapey-regular.ttf" id="13_xj74i"]
+[ext_resource type="Texture2D" uid="uid://bhvmc4gfjjfae" path="res://assets/credits/profile.png" id="14_mbxpg"]
+[ext_resource type="Texture2D" uid="uid://crp30u2buhxkv" path="res://assets/credits/circle.png" id="15_l15nb"]
+[ext_resource type="Texture2D" uid="uid://bfxsh1dqq4vwq" path="res://assets/credits/profile_pic.jpg" id="16_irw2x"]
+[ext_resource type="Texture2D" uid="uid://cb24ddtqxp5d4" path="res://assets/credits/Cbmarcilio.png" id="17_q16i6"]
+[ext_resource type="Texture2D" uid="uid://dbsc3ixie0uh7" path="res://assets/credits/gmtk.png" id="18_tkcw0"]
 
 [sub_resource type="GDScript" id="GDScript_dkuy3"]
 script/source = "extends Camera2D
@@ -141,12 +150,36 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.0627451)]
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("win/Sprite2D:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("win/Sprite2D2:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_bi4rc"]
 resource_name = "finale"
-length = 10.0
+length = 15.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -154,10 +187,10 @@ tracks/0/path = NodePath("CanvasLayer/ColorRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1, 2),
-"transitions": PackedFloat32Array(1, 2.46229, 1),
+"times": PackedFloat32Array(0, 1, 2, 9.4, 10.4),
+"transitions": PackedFloat32Array(1, 2.46229, 1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0.988235), Color(0, 0, 0, 0.988235), Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 0.988235), Color(0, 0, 0, 0.988235), Color(0, 0, 0, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -216,17 +249,82 @@ tracks/5/path = NodePath("win/Sprite2D:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 9.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 9.4, 10.4, 11.7333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0.0627451), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("win/Sprite2D:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(13.5333, 14),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("win/Sprite2D2:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0333333, 13.5333, 14),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, false, true]
+}
+tracks/8/type = "audio"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AudioStreamPlayer2")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("7_yd4o7")
+}],
+"times": PackedFloat32Array(14)
+}
+tracks/8/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_avy5a"]
 _data = {
 "RESET": SubResource("Animation_e64x6"),
 "finale": SubResource("Animation_bi4rc")
 }
+
+[sub_resource type="Shader" id="Shader_74hhx"]
+code = "shader_type canvas_item;
+
+void vertex() {
+	// Called for every vertex the material is visible on.
+}
+
+void fragment() {
+	if(length(vec2(0.5,0.5) - UV) > 0.5){
+		COLOR.a = 0.0;
+	}
+	
+	if(length(vec2(0.5,0.5) - UV) > 0.473){
+		COLOR.rgb = vec3(0.);
+	}
+}
+
+//void light() {
+	// Called for every pixel for every light affecting the CanvasItem.
+	// Uncomment to replace the default light processing function with this one.
+//}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_op0u7"]
+shader = SubResource("Shader_74hhx")
 
 [node name="notherone" type="Node2D"]
 
@@ -376,7 +474,165 @@ volume_db = -80.0
 [node name="win" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="win"]
-modulate = Color(1, 1, 1, 0.0627451)
+modulate = Color(1, 1, 1, 0)
 scale = Vector2(2, 2)
 texture = ExtResource("9_6qc6n")
 centered = false
+
+[node name="Label" type="Label" parent="win/Sprite2D"]
+offset_left = 114.5
+offset_right = 520.5
+offset_bottom = 65.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("11_xcspn")
+theme_override_font_sizes/font_size = 51
+text = "Thanks for Playing!"
+
+[node name="Sprite2D2" type="Sprite2D" parent="win"]
+visible = false
+scale = Vector2(2, 2)
+texture = ExtResource("12_db03u")
+centered = false
+
+[node name="Label" type="Label" parent="win/Sprite2D2"]
+offset_left = 212.5
+offset_top = 61.0
+offset_right = 439.5
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 41
+text = "Programming"
+
+[node name="Label8" type="Label" parent="win/Sprite2D2"]
+offset_left = 249.5
+offset_top = 10.0
+offset_right = 476.5
+offset_bottom = 56.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 41
+text = "Credits!"
+
+[node name="Label4" type="Label" parent="win/Sprite2D2"]
+offset_left = 273.0
+offset_top = 121.5
+offset_right = 500.0
+offset_bottom = 167.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 25
+text = "Someoneyeeted"
+
+[node name="Label5" type="Label" parent="win/Sprite2D2"]
+offset_left = 163.878
+offset_top = 202.5
+offset_right = 390.878
+offset_bottom = 248.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 25
+text = "AutumnLion	"
+
+[node name="Label6" type="Label" parent="win/Sprite2D2"]
+offset_left = 437.378
+offset_top = 202.5
+offset_right = 664.378
+offset_bottom = 248.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 25
+text = "Thun"
+
+[node name="Label7" type="Label" parent="win/Sprite2D2"]
+offset_left = 306.353
+offset_top = 301.0
+offset_right = 533.353
+offset_bottom = 347.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 25
+text = "@caboklo1"
+
+[node name="Label2" type="Label" parent="win/Sprite2D2"]
+offset_left = 291.5
+offset_top = 147.5
+offset_right = 518.5
+offset_bottom = 193.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 41
+text = "Art"
+
+[node name="Label3" type="Label" parent="win/Sprite2D2"]
+offset_left = 265.5
+offset_top = 236.5
+offset_right = 492.5
+offset_bottom = 282.5
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/outline_size = 1
+theme_override_fonts/font = ExtResource("13_xj74i")
+theme_override_font_sizes/font_size = 41
+text = "Music"
+
+[node name="Sprite2D" type="Sprite2D" parent="win/Sprite2D2"]
+material = SubResource("ShaderMaterial_op0u7")
+position = Vector2(246, 136.5)
+scale = Vector2(0.145331, 0.145331)
+texture = ExtResource("14_mbxpg")
+
+[node name="Sprite2D2" type="Sprite2D" parent="win/Sprite2D2"]
+material = SubResource("ShaderMaterial_op0u7")
+position = Vector2(408.378, 219)
+scale = Vector2(0.101514, 0.101514)
+texture = ExtResource("15_l15nb")
+
+[node name="Sprite2D3" type="Sprite2D" parent="win/Sprite2D2"]
+material = SubResource("ShaderMaterial_op0u7")
+position = Vector2(135.878, 219)
+scale = Vector2(0.101514, 0.101514)
+texture = ExtResource("16_irw2x")
+
+[node name="Sprite2D4" type="Sprite2D" parent="win/Sprite2D2"]
+material = SubResource("ShaderMaterial_op0u7")
+position = Vector2(276.853, 317.5)
+scale = Vector2(0.036743, 0.036743)
+texture = ExtResource("17_q16i6")
+
+[node name="Gmtk" type="Sprite2D" parent="win/Sprite2D2"]
+position = Vector2(73.5, 41.5)
+scale = Vector2(0.0761473, 0.0761473)
+texture = ExtResource("18_tkcw0")
+
+[node name="AudioStreamPlayer2" type="AudioStreamPlayer" parent="."]
