@@ -6,6 +6,8 @@ var curlvl := -1
 var levels = [
 	"res://levels/level_1.tscn",
 	"res://levels/level_2.tscn",
+	"res://levels/level_3.tscn",
+	"res://levels/level_4.tscn",
 	"res://levels/test.tscn",
 	"res://levels/mindfield.tscn",
 	"res://levels/finale.tscn"
@@ -25,6 +27,11 @@ func _win():
 func _input(event: InputEvent) -> void:
 	if(event.is_action_pressed("restart")):
 		$AnimationPlayer.play("restart")
+	if(event.is_action_pressed("fullscreen")):
+		if(DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED):
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 
 func switch_to(level):
 	get_tree().call_deferred("change_scene_to_file",levels[level])
