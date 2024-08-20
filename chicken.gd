@@ -10,6 +10,8 @@ var currentpos
 var movetarget
 var mult :float= 0
 var yoff :float= 0
+var setfordeath = false
+var extended = false
 @export var moves := true
 
 const PART = preload("res://feathers.tscn")
@@ -36,7 +38,7 @@ func move():
 	position.x = currentpos
 	$Sprite.global_position = global_position
 	movetarget = currentpos + dir * 40
-	global_position.x += 40 * dir
+	#global_position.x += 40 * dir
 
 func _physics_process(delta: float) -> void:
 	if($AnimationPlayer.is_playing()):
@@ -46,6 +48,7 @@ func _physics_process(delta: float) -> void:
 	
 	#$CollisionShape2D.position.x = 40 * dir
 	$Sprite.global_position.x = lerp(currentpos,movetarget,1 - easeing(Manger.timer.time_left / Manger.timer.wait_time))
+	global_position.x = lerp(currentpos,movetarget,1 - easeing(Manger.timer.time_left / Manger.timer.wait_time))
 	if(moves):
 		$Sprite.global_position.y = lerp($Sprite.global_position.y - 3.75 * 0.222 + yoff,global_position.y - 3.75 * 0.222,0.4)
 	else:
@@ -88,11 +91,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		pass
 
 func _on_eaten_area_entered(area: Area2D) -> void:
-	if(area.is_in_group("squish")):
+	if(area.is_in_group("squish") and not extended):
 		if(area.get_parent().ishead):
 			area.get_parent().extend.emit()
-		if($AnimationPlayer.is_playing() and $AnimationPlayer.current_animation == "Die"):
-			return
+			extended = true
 		var part = PART.instantiate()
 		get_parent().add_child(part)
 		$Sprite.top_level = false
