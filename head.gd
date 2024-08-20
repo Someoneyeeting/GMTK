@@ -84,7 +84,7 @@ func cut(ind,delseg = true):
 		$BodyAnimation.body[-1].prevseg = null
 	get_parent().add_child.call_deferred(body)
 
-func move(dir):
+func move(dir,trigger = true):
 	var ray : RayCast2D
 	if(dir.x > 0): ray = %right
 	elif(dir.x < 0): ray = %left
@@ -114,7 +114,7 @@ func move(dir):
 		cols[i].position += poses[i]
 	lastdir = dir
 	if(not win):
-		if($spawn.is_stopped()):
+		if(trigger):
 			$move.pitch_scale = randf_range(0.8,1)
 			$move.play()
 			Manger.move.emit()
@@ -221,4 +221,4 @@ func _on_win_timeout() -> void:
 
 
 func _on_spawn_timeout() -> void:
-	move(Vector2(40,0))
+	move(Vector2(40,0),false)

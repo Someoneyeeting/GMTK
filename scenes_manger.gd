@@ -13,5 +13,8 @@ func _input(event: InputEvent) -> void:
 		$AnimationPlayer.play("restart")
 
 
+func _next():
+	pass
+
 func _restart():
 	get_tree().reload_current_scene()

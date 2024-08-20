@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://dp0l7ck638dt8"]
+[gd_scene load_steps=11 format=3 uid="uid://dp0l7ck638dt8"]
 
 [ext_resource type="Script" path="res://gate.gd" id="1_fvxuu"]
 [ext_resource type="Texture2D" uid="uid://c2r4w7qnkw245" path="res://gatebase.png" id="1_w4m5v"]
 [ext_resource type="Texture2D" uid="uid://bn5x528kk4tf3" path="res://assets/gate.png" id="2_whgg4"]
+[ext_resource type="AudioStream" uid="uid://di68m6bq2ts56" path="res://assets/soundeffects/click-1.mp3" id="4_qtukp"]
 
 [sub_resource type="Animation" id="Animation_sradm"]
 length = 0.001
@@ -100,3 +101,7 @@ disabled = true
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, -20.5)
 shape = SubResource("RectangleShape2D_12kxs")
+
+[node name="click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qtukp")
+volume_db = -4.0

@@ -9,6 +9,7 @@ func _ready() -> void:
 func activate():
 	activated = true
 	$AnimationPlayer.play("close")
+	$click.play()
 
 func _timeout():
 	$cut/CollisionShape2D.disabled = not activated
@@ -17,3 +18,4 @@ func _timeout():
 func deactivate():
 	activated = false
 	$AnimationPlayer.play_backwards("close")
+	$click.play()

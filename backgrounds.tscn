@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://blh054n3vecuf"]
+[gd_scene load_steps=7 format=3 uid="uid://blh054n3vecuf"]
 
 [ext_resource type="PackedScene" uid="uid://dlee7qqkhtk3v" path="res://clouds.tscn" id="1_6xe7g"]
 [ext_resource type="PackedScene" uid="uid://0eob1v8xpjxi" path="res://background.tscn" id="3_rm7f7"]
@@ -59,6 +59,19 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qf070"]
 shader = SubResource("Shader_3bkkq")
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_uykud"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 360, 1)
+direction = Vector3(-1, 0, 0)
+spread = 0.0
+initial_velocity_max = 134.41
+gravity = Vector3(-4, 1, 0)
+linear_accel_min = -7.53
+linear_accel_max = 1.08
+scale_max = 3.0
+color = Color(0, 0.941263, 0.0515251, 1)
+
 [node name="backgrounds" type="Node2D"]
 
 [node name="cloudspawn" type="Node2D" parent="."]
@@ -115,5 +128,12 @@ layer = -128
 [node name="background" parent="CanvasLayer" instance=ExtResource("3_rm7f7")]
 z_index = -1005
 metadata/_edit_lock_ = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+z_index = 380
+position = Vector2(1355, 350)
+amount = 130
+process_material = SubResource("ParticleProcessMaterial_uykud")
+lifetime = 15.0
 
 [connection signal="timeout" from="cloudspawn/Timer" to="cloudspawn" method="_on_timer_timeout"]
