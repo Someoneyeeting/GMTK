@@ -1,8 +1,33 @@
-[gd_scene load_steps=10 format=3 uid="uid://cqpwsek5kc0lv"]
+[gd_scene load_steps=15 format=3 uid="uid://cqpwsek5kc0lv"]
 
 [ext_resource type="PackedScene" uid="uid://0eob1v8xpjxi" path="res://background.tscn" id="1_4w514"]
 [ext_resource type="FontFile" uid="uid://bjokimfv4db2e" path="res://arapey-regular.ttf" id="2_mmaq6"]
 [ext_resource type="PackedScene" uid="uid://dlee7qqkhtk3v" path="res://clouds.tscn" id="3_8kcxu"]
+[ext_resource type="Texture2D" uid="uid://d22d4g1jndvtq" path="res://assets/mainmenu/jeff.png" id="4_rhcm6"]
+[ext_resource type="Texture2D" uid="uid://d1twg0xe1v3q8" path="res://assets/mainmenu/Untitled395_20240819073949.png" id="5_kn2nb"]
+[ext_resource type="Texture2D" uid="uid://kpdssbhr0v0" path="res://assets/mainmenu/Untitled410_20240819201640.png" id="6_w25bd"]
+
+[sub_resource type="GDScript" id="GDScript_747gg"]
+script/source = "extends Node2D
+
+
+func _ready() -> void:
+	if(\"web\" in OS.get_name().to_lower() or true):
+		$notice/Button.disabled = false
+		$AnimationPlayer.play(\"notice_in\")
+		
+		
+
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if(anim_name == \"noitce_out\"):
+		$AnimationPlayer.play(\"menu_in\")
+
+
+func _on_button_pressed() -> void:
+	print(\"press\")
+	$AnimationPlayer.play(\"notice_out\")
+"
 
 [sub_resource type="Shader" id="Shader_ikbg8"]
 code = "shader_type canvas_item;
@@ -54,7 +79,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -80,10 +105,34 @@ tracks/2/keys = {
 "update": 0,
 "values": [0.0]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("menu:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 720)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("menu:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_8gw2g"]
 resource_name = "notice_out"
-length = 2.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -109,18 +158,49 @@ tracks/1/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_6hvvn"]
+resource_name = "menu_in"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.210224, 1),
+"update": 0,
+"values": [Vector2(0, 720), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("menu:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yqbtv"]
 _data = {
 "RESET": SubResource("Animation_wi8ir"),
+"menu_in": SubResource("Animation_6hvvn"),
 "notice_in": SubResource("Animation_uxhc2"),
 "notice_out": SubResource("Animation_8gw2g")
 }
 
 [node name="mainmenu" type="Node2D"]
+script = SubResource("GDScript_747gg")
 
 [node name="background" parent="." instance=ExtResource("1_4w514")]
 
 [node name="notice" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 
 [node name="Label" type="Label" parent="notice"]
 offset_left = 541.0
@@ -156,6 +236,7 @@ offset_left = 144.0
 offset_top = 151.0
 offset_right = 1179.0
 offset_bottom = 724.0
+mouse_filter = 2
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_constants/shadow_offset_x = 2
@@ -169,6 +250,7 @@ offset_left = 829.0
 offset_top = 461.0
 offset_right = 1103.0
 offset_bottom = 633.0
+mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Button" type="Button" parent="notice"]
@@ -179,13 +261,39 @@ offset_bottom = 708.0
 theme_override_colors/icon_normal_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_mmaq6")
 theme_override_font_sizes/font_size = 41
+action_mode = 0
 text = "Continue"
 
 [node name="Node2D" parent="notice" instance=ExtResource("3_8kcxu")]
 position = Vector2(959, 553)
 scale = Vector2(1.81549, 3.94558)
 
+[node name="menu" type="Node2D" parent="."]
+position = Vector2(0, 720)
+
+[node name="Jeff" type="Sprite2D" parent="menu"]
+scale = Vector2(2.00481, 2.00481)
+texture = ExtResource("4_rhcm6")
+centered = false
+
+[node name="Untitled39520240819073949" type="Sprite2D" parent="menu"]
+position = Vector2(262, 127)
+rotation = 0.0576342
+scale = Vector2(1.63444, 1.63444)
+texture = ExtResource("5_kn2nb")
+
+[node name="TextureButton" type="TextureButton" parent="menu"]
+offset_left = 106.0
+offset_top = 251.0
+offset_right = 427.0
+offset_bottom = 451.0
+texture_normal = ExtResource("6_w25bd")
+stretch_mode = 5
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_yqbtv")
 }
+
+[connection signal="pressed" from="notice/Button" to="." method="_on_button_pressed"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
